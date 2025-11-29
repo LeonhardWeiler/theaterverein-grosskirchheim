@@ -3,7 +3,7 @@ import './App.css'
 function App() {
 
 	return (
-		<h1>Theater-Großkirchheim</h1>
+		<h1>Theaterverein Großkirchheim</h1>
 	)
 }
 
