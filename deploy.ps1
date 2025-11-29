@@ -24,7 +24,7 @@ Remove-Item -Recurse -Force .\dist
 
 # 6️⃣ Git Commit & Push
 Write-Host "Adding files to git..."
-git add .
+git add index.html assets vite.svg
 
 Write-Host "Committing..."
 git commit -m "Auto deploy from main branch"
