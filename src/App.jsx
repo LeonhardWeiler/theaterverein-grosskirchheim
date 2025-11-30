@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <h1>Theaterverein Großkirchheim</h1>
+      <h1>Theaterverein-Großkirchheim</h1>
       <Footer />
     </>
   )
