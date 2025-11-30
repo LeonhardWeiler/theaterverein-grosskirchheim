@@ -36,7 +36,7 @@ ul {
   justify-content: space-evenly;
   align-items: center;
   padding: 1rem;
-  background-color: var(--grey-800);
+  background-color: var(--grey-900);
   color: var(--grey-100);
   width: 100%;
   height: 60px;
@@ -52,7 +52,7 @@ ul {
 }
 
 .link-highlighted {
-  text-decoration: underline;
+  border-bottom: 2px solid var(--grey-900);
 }
 
 /* --- Navbar Grundlayout --- */
@@ -60,9 +60,10 @@ ul {
   display: flex;
   align-items: center;
   padding: 1rem 2rem;
-  background: var(--grey-800);
+  background-color: rgba(243, 244, 246, 0.7);
+  backdrop-filter: blur(5px);
   width: 100%;
-  color: var(--grey-100);
+  color: var(--grey-900);
   position: fixed;
   height: 60px;
   top: 0;
@@ -94,7 +95,7 @@ ul {
 .hamburger span {
   width: 25px;
   height: 3px;
-  background: var(--grey-100);
+  background: var(--grey-900);
 }
 
 /* --- Fullscreen Mobile Menu --- */
@@ -139,9 +140,10 @@ ul {
 
 .mobile-menu li {
   margin: 1rem 0;
+  transition: transform 0.2s ease;
 
   &:hover, &:focus {
-    text-decoration: underline;
+    transform: translateX(12px);
   }
 }
 
@@ -168,7 +170,7 @@ ul {
   justify-content: center;
   align-items: center;
   height: 100dvh;
-  color: var(--grey-800);
+  color: var(--grey-900);
   text-align: center;
 }
 
@@ -177,14 +179,14 @@ ul {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: var(--grey-800);
+  color: var(--grey-900);
   text-align: center;
 }
 
 .to-start-link {
   margin-top: 1.5rem;
   padding: 0.75rem 1.5rem;
-  background-color: var(--grey-800);
+  background-color: var(--grey-900);
   color: var(--grey-100);
   border-radius: 5px;
   transition: background-color 0.1s ease;
@@ -199,5 +201,6 @@ main {
   justify-content: center;
   align-items: center;
   margin-top: 60px;
-  min-height: calc(100dvh - 120px);
+  min-height: calc(200dvh - 120px);
+  color: var(--grey-900);
 }
