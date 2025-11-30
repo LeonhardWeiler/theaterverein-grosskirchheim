@@ -1,18 +1,43 @@
-import '../App.css'
+import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import '../main.css'
 
 function Navbar() {
+  const [open, setOpen] = useState(false)
+
   return (
-    <div className="navbar">
-      <p>Theaterverein Großkirchheim</p>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#events">Events</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
+    <>
+      <nav className="navbar">
+        {/* Hauptseite-Link immer sichtbar */}
+        <NavLink to="/" className="logo">
+          Theaterverein Großkirchheim
+        </NavLink>
+
+        {/* Desktop Navigation */}
+        <ul className="desktop-nav">
+          <li><NavLink to="/vorstellungen" className={({isActive}) => isActive ? 'link-highlighted' : ''}>Alle Vorstellungen</NavLink></li>
+          <li><NavLink to="/kontakt" className={({isActive}) => isActive ? 'link-highlighted' : ''}>Kontakt</NavLink></li>
+        </ul>
+
+        {/* Hamburger für mobile */}
+        <button className="hamburger" onClick={() => setOpen(true)}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+
+      {/* Fullscreen Overlay Menu */}
+      <div className={`mobile-menu ${open ? 'open' : ''}`}>
+        <button className="close-btn" onClick={() => setOpen(false)}>×</button>
+        <ul>
+          <li><NavLink to="/" onClick={() => setOpen(false)}>Startseite</NavLink></li>
+          <li><NavLink to="/vorstellungen" onClick={() => setOpen(false)}>Alle Vorstellungen</NavLink></li>
+          <li><NavLink to="/kontakt" onClick={() => setOpen(false)}>Kontakt</NavLink></li>
+        </ul>
+      </div>
+    </>
   )
 }
 
 export default Navbar
-
