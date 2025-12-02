@@ -76,11 +76,9 @@ ul {
 }
 
 .link-highlighted {
-  /* border-bottom: 2px solid var(--grey-900); */
   font-weight: bold;
 }
 
-/* --- Navbar Grundlayout --- */
 .navbar {
   display: flex;
   align-items: center;
@@ -95,20 +93,17 @@ ul {
   z-index: 1000;
 }
 
-/* Hauptlink / Logo */
 .logo {
   font-weight: bold;
   font-size: clamp(1rem, 2.5vw, 1.5rem);
   margin-right: auto;
 }
 
-/* Desktop Navigation */
 .desktop-nav {
   display: flex;
   gap: 1.5rem;
 }
 
-/* Hamburger Button */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -125,7 +120,6 @@ ul {
   background: var(--grey-900);
 }
 
-/* --- Fullscreen Mobile Menu --- */
 .mobile-menu {
   position: fixed;
   top: 0;
@@ -146,7 +140,6 @@ ul {
   display: flex;
 }
 
-/* Close Button oben rechts */
 .close-btn {
   position: absolute;
   top: 0;
@@ -179,7 +172,6 @@ ul {
   font-weight: bold;
 }
 
-/* --- RESPONSIVE --- */
 @media (max-width: 700px) {
   .desktop-nav {
     display: none;
@@ -250,12 +242,12 @@ main {
 
 .year-grid {
   display: flex;
-  flex-wrap: wrap;        /* Mehrere Zeilen erlauben */
-  gap: 8px;               /* Abstand zwischen den Buttons */
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .year-btn {
-  flex: 1 1 60px;         /* flexibel wachsen, mindestens 60px */
+  flex: 1 1 60px;
   padding: 8px;
   border: none;
   border-radius: 4px;
@@ -295,6 +287,10 @@ main {
 }
 
 .item-image {
+  background-color: var(--grey-800);
+  font-weight: bold;
+  display: grid;
+  place-items: center;
   max-height: 80%;
   aspect-ratio: 16 / 9;
   min-height: 200px;
@@ -306,7 +302,6 @@ main {
   padding: 8px 12px;
 }
 
-/* --- Image Carousel --- */
 .carousel-container {
   position: relative;
   text-align: center;
@@ -350,4 +345,3 @@ main {
 .carousel-btn.right {
   right: 10px;
 }
-

@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-import { loadFirstImageFromFolder } from "../utils/loadImages";
+import { loadFirstImage } from "../utils/loadMedia";
 
 function ShowVorstellungen({ items }) {
-  if (!items.length) return <li>Keine Ergebnisse gefunden</li>;
+  if (!items.length) return <p>Keine Ergebnisse gefunden</p>;
 
   return (
     <>
       {items.map((item) => {
-        const preview = loadFirstImageFromFolder(item["image-folder"]);
+        const preview = loadFirstImage(item["media-folder"]);
 
         return (
           <Link

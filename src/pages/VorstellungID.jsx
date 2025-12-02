@@ -1,16 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import ImageCarousel from "../components/ImageCarousel";
+import vorstellungenData from "../data/vorstellungen.json";
 
 function VorstellungID() {
   const { id } = useParams();
-  const [item, setItem] = useState(null);
-
-  useEffect(() => {
-    fetch("/data/vorstellungen.json")
-      .then((res) => res.json())
-      .then((json) => setItem(json[id]));
-  }, [id]);
+  const item = vorstellungenData[id];
 
   if (!item) return <p>Lade...</p>;
 
@@ -20,7 +15,7 @@ function VorstellungID() {
       <h1>{item.title}</h1>
       <p>{item.date}</p>
 
-      <ImageCarousel folder={item["image-folder"]} />
+      <ImageCarousel folder={item["media-folder"]} />
 
       <div className="item-text">{item.content}</div>
     </div>

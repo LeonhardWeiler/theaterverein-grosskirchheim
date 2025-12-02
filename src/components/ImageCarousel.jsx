@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { loadAllImagesFromFolder } from "../utils/loadImages";
+import { loadMedia } from "../utils/loadMedia";
 
 function ImageCarousel({ folder }) {
   const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const imgs = loadAllImagesFromFolder(folder);
+    const imgs = loadMedia(folder);
     setImages(imgs);
-    setCurrentIndex(0); // beim Wechsel des Ordners immer erstes Bild
+    setCurrentIndex(0);
   }, [folder]);
 
   if (!images.length) return <p>Keine Bilder gefunden.</p>;

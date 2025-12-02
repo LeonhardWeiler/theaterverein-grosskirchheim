@@ -1,29 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ShowVorstellungen from "../components/ShowVorstellungen";
+import vorstellungenData from "../data/vorstellungen.json";
 
 function VorstellungenListe() {
-  const [data, setData] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedYear, setSelectedYear] = useState(null);
-
-  useEffect(() => {
-    fetch("/data/vorstellungen.json")
-      .then((res) => res.json())
-      .then((json) => setData(json));
-  }, []);
-
-  const items = Object.entries(data).map(([id, item]) => ({
-    id,
-    ...item
-  }));
-
+  const items = Object.entries(vorstellungenData).map(([id, item]) => ({id, ...item }));
   const years = Array.from(new Set(items.map((i) => parseInt(i.date)))).sort((a, b) => a - b);
 
   const filteredItems = items
-    .filter((item) => item.title.toLowerCase().includes(searchTerm.toLowerCase()))
     .filter((item) =>
-      selectedYear ? parseInt(item.date) === selectedYear : true
-    );
+      item.title.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .filter((item) => (selectedYear ? parseInt(item.date) === selectedYear : true));
 
   return (
     <div className="vorstellungen-page">
