@@ -1,0 +1,4 @@
+{
+  "1": { "name": "Max Mustermann", "bio": "Entwickler", "imageUrl": "/images/profile1.jpg", "posts": ["Post 1", "Post 2"] },
+  "2": { "name": "Anna Beispiel", "bio": "Designer", "imageUrl": "/images/profile2.jpg", "posts": ["Post A", "Post B"] }
+}
