@@ -5,7 +5,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './main.css'
 
 import Home from './pages/Home.jsx'
-import Vorstellungen from './pages/Vorstellungen.jsx'
+import VorstellungenListe from './pages/VorstellungenListe.jsx'
+import VorstellungID from './pages/VorstellungID.jsx'
 import Kontakt from './pages/Kontakt.jsx'
 import Layout from './components/Layout.jsx'
 import ErrorPage from './pages/ErrorPage.jsx'
@@ -18,7 +19,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> },
-      { path: 'vorstellungen', element: <Vorstellungen /> },
+      { path: 'vorstellungen', element: <VorstellungenListe /> },
+      { path: 'vorstellungen/:id', element: <VorstellungID /> },
       { path: 'kontakt', element: <Kontakt /> },
       { path: '*', element: <NotFound /> }
     ]

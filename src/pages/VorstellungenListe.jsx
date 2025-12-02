@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const items = [
   {
@@ -33,8 +34,7 @@ const items = [
   },
 ];
 
-function Vorstellungen() {
-  const [sortOrder, setSortOrder] = useState("asc");
+function VorstellungenListe() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedYear, setSelectedYear] = useState(null);
 
@@ -43,42 +43,24 @@ function Vorstellungen() {
   ).sort((a, b) => b - a);
 
   const filteredItems = items
-    .filter((item) =>
-      item.title.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .filter((item) =>
-      selectedYear ? new Date(item.createdAt).getFullYear() === selectedYear : true
-    )
-    .sort((a, b) => {
-      if (sortOrder === "asc") {
-        return new Date(a.createdAt) - new Date(b.createdAt);
-      } else {
-        return new Date(b.createdAt) - new Date(a.createdAt);
-      }
-    });
+  .filter((item) =>
+    item.title.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+  .filter((item) =>
+    selectedYear ? new Date(item.createdAt).getFullYear() === selectedYear : true
+  );
 
   return (
     <div className="vorstellungen-page">
       <h1>Vorstellungen</h1>
 
-      <div className="controls">
-        <input
-          type="text"
-          placeholder="Suche nach Titel..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
-        />
-
-        <select
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
-          className="sort-select"
-        >
-          <option value="asc">Älteste zuerst</option>
-          <option value="desc">Neueste zuerst</option>
-        </select>
-      </div>
+      <input
+        type="text"
+        placeholder="Suche nach einer Vorstellung..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="search-input"
+      />
 
       <div className="year-grid">
         <button
@@ -102,12 +84,12 @@ function Vorstellungen() {
 
       <ul className="items-list">
         {filteredItems.map((item) => (
-          <li key={item.id} className="item">
+          <Link key={item.id} className="item" to={`/vorstellungen/${item.id}`}>
             <img src={item.imageUrl} alt={item.title} className="item-image" />
             <div className="item-text">
-              <strong>{item.title}</strong> - {item.createdAt}
+              <p>{item.title} - {item.createdAt}</p>
             </div>
-          </li>
+          </Link>
         ))}
         {filteredItems.length === 0 && <li>Keine Ergebnisse gefunden</li>}
       </ul>
@@ -115,5 +97,5 @@ function Vorstellungen() {
   );
 }
 
-export default Vorstellungen;
+export default VorstellungenListe;
 

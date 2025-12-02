@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 :root {
@@ -35,6 +36,19 @@
 a {
   color: inherit;
   text-decoration: none;
+  transition: transform 0.2s ease;
+
+  &:hover, &:focus {
+    transform: translateY(-2px);
+  }
+}
+
+li {
+  transition: transform 0.2s ease;
+
+  &:hover, &:focus {
+    transform: translateY(-2px);
+  }
 }
 
 ul {
@@ -62,14 +76,15 @@ ul {
 }
 
 .link-highlighted {
-  border-bottom: 2px solid var(--grey-900);
+  /* border-bottom: 2px solid var(--grey-900); */
+  font-weight: bold;
 }
 
 /* --- Navbar Grundlayout --- */
 .navbar {
   display: flex;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 1rem clamp(1rem, 5vw, 4rem);
   background-color: rgba(243, 244, 246, 0.7);
   backdrop-filter: blur(5px);
   width: 100%;
@@ -77,6 +92,7 @@ ul {
   position: fixed;
   height: 60px;
   top: 0;
+  z-index: 1000;
 }
 
 /* Hauptlink / Logo */
@@ -100,6 +116,7 @@ ul {
   background: transparent;
   border: none;
   cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
 }
 
 .hamburger span {
@@ -207,40 +224,28 @@ ul {
 }
 
 main {
-  margin-inline: 4rem;
-  margin-block: 60px;
-  /* min-height: calc(100dvh - 120px); */
+  margin-inline: clamp(1rem, 5vw, 4rem);
+  margin-block: 4rem;
   color: var(--grey-900);
 }
 
 .vorstellungen-page {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
-.controls {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.search-input,
-.sort-select {
+.search-input {
   padding: 8px;
   border-radius: 4px;
   border: 1px solid var(--grey-300);
   font-size: 1rem;
-  flex: 1;
+  width: 100%;
+  transition: outline 0.1s ease-in-out;
 
-  &:focus {
+  &:focus, &:hover {
     outline: 2px solid var(--grey-900);
   }
-}
-
-.search-input {
-  min-width: 200px;
-
 }
 
 .year-grid {
@@ -280,6 +285,12 @@ main {
   overflow: hidden;
   background-color: var(--grey-900);
   color: var(--grey-100);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+  &:hover, &:focus {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-4px);
+  }
 }
 
 .item-image {
