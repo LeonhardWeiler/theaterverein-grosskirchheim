@@ -1,12 +1,12 @@
 const mediaFiles = import.meta.glob(
-  "/src/assets/images/**/{images,videos}/*.{webp,jpg,jpeg,png,mp4,mov}",
+  "/src/assets/**/{images,videos}/*.{webp,jpg,jpeg,png,mp4,mov}",
   { eager: true, import: "default" }
 );
 
 export function loadMedia(folder, type = "images") {
   if (!folder) return [];
 
-  const base = `/src/assets/images/${folder}/${type}/`;
+  const base = `/src/assets/${folder}/${type}/`;
 
   return Object.entries(mediaFiles)
     .filter(([path]) => path.startsWith(base))
