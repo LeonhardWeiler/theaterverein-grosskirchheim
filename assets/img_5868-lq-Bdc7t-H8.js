@@ -1,0 +1,1 @@
+const A="data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAACQBgCdASoyACEAPzmIuFWvKLIjLVmbakAnCWNr21eZC0XpepwzO7SJQ/ClW04hu+GnN3XT5cJ+OC0dAwAAAP7Rzc7FqXYoPjK5tlg4e+6kAuhbjtZRanJwcvxmYFbTy05e5QuHkFTp6gRU8VdHxuWcze2C4PfW4ttQE51qBZd/+jKqprWHd+cjAMS+c5+sXeBgXXqas51NQCKmY/TYMVuIDQzyWgoA";export{A as default};
