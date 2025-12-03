@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SmartImage from "./SmartImage";
 import { loadFirstImage } from "../utils/loadMedia";
 
 function ShowVorstellungen({ items }) {
@@ -10,13 +11,15 @@ function ShowVorstellungen({ items }) {
         const preview = loadFirstImage(item["media-folder"]);
 
         return (
-          <Link
-            key={item.id}
-            to={`/vorstellungen/${item.id}`}
-            className="item"
-          >
+          <Link key={item.id} to={`/vorstellungen/${item.id}`} className="item">
             {preview ? (
-              <img src={preview} alt={item.title} className="item-image" />
+              <SmartImage
+                full={preview.big}
+                w700={preview.medium}
+                w400={preview.small}
+                lq={preview.lq}
+                alt={item.title}
+              />
             ) : (
               <div className="item-image">Kein Bild</div>
             )}

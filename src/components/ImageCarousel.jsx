@@ -1,38 +1,32 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import SmartImage from "./SmartImage";
 import { loadMedia } from "../utils/loadMedia";
 
 function ImageCarousel({ folder }) {
-  const [images, setImages] = useState([]);
+  const images = loadMedia(folder);
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const imgs = loadMedia(folder);
-    setImages(imgs);
-    setCurrentIndex(0);
-  }, [folder]);
 
   if (!images.length) return <p>Keine Bilder gefunden.</p>;
 
-  const prevImage = () => {
-    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  };
+  const img = images[currentIndex];
 
-  const nextImage = () => {
-    setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-  };
+  const prevImage = () =>
+    setCurrentIndex((i) => (i === 0 ? images.length - 1 : i - 1));
+  const nextImage = () =>
+    setCurrentIndex((i) => (i === images.length - 1 ? 0 : i + 1));
 
   return (
     <div className="carousel-container">
-      <img
-        src={images[currentIndex]}
-        alt={`Bild ${currentIndex}`}
-        className="carousel-image"
+      <SmartImage
+        full={img.big}
+        w700={img.medium}
+        w400={img.small}
+        lq={img.lq}
+        alt={`Bild ${img.id}`}
       />
-
       <button className="carousel-btn left" onClick={prevImage}>
         ‹
       </button>
-
       <button className="carousel-btn right" onClick={nextImage}>
         ›
       </button>
