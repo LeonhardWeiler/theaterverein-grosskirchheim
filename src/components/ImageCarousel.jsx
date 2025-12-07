@@ -4,21 +4,28 @@ import { loadMedia } from "../utils/loadMedia";
 function ImageCarousel({ folder, imageCount }) {
   const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-  // Bildpfade laden (nur Metadaten)
   useEffect(() => {
+    setLoading(true);
     const media = loadMedia(folder, imageCount);
     setImages(media);
+    setCurrentIndex(0);
+    setLoading(false);
   }, [folder, imageCount]);
 
+  if (loading) return null;
   if (!images.length) return <p>Keine Bilder gefunden.</p>;
 
   const img = images[currentIndex];
 
-  const prevImage = () =>
-    setCurrentIndex((i) => (i === 0 ? images.length - 1 : i - 1));
-  const nextImage = () =>
-    setCurrentIndex((i) => (i === images.length - 1 ? 0 : i + 1));
+  const prevImage = () => {
+    if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
+  };
+
+  const nextImage = () => {
+    if (currentIndex < images.length - 1) setCurrentIndex(currentIndex + 1);
+  };
 
   return (
     <div className="carousel-container">
@@ -29,12 +36,16 @@ function ImageCarousel({ folder, imageCount }) {
         alt={`Bild ${currentIndex + 1}`}
         className="item-image"
       />
-      <button className="carousel-btn left" onClick={prevImage}>
-        ‹
-      </button>
-      <button className="carousel-btn right" onClick={nextImage}>
-        ›
-      </button>
+      {currentIndex > 0 && (
+        <button className="carousel-btn left" onClick={prevImage}>
+          ‹
+        </button>
+      )}
+      {currentIndex < images.length - 1 && (
+        <button className="carousel-btn right" onClick={nextImage}>
+          ›
+        </button>
+      )}
     </div>
   );
 }

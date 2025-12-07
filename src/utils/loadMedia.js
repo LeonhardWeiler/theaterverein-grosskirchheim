@@ -1,6 +1,3 @@
-/**
- * Erzeugt alle Bildvarianten für einen Basenamen
- */
 export function getImageVariants(folder, baseName) {
   const basePath = `/assets/${folder}/images/`;
 
@@ -12,22 +9,12 @@ export function getImageVariants(folder, baseName) {
   };
 }
 
-/**
- * Erzeugt die Liste aller Basenamen
- * Beispiel: count = 3 → ["0001", "0002", "0003"]
- */
 export function generateBaseNames(count) {
   return Array.from({ length: count }, (_, i) =>
     String(i + 1).padStart(4, "0")
   );
 }
 
-/**
- * Lädt alle Bilder eines Ordners
- * Parameter:
- *  - folder (String)
- *  - count  (Number) wie viele Bilder, z. B. 123
- */
 export function loadMedia(folder, count) {
   const baseNames = generateBaseNames(count);
 

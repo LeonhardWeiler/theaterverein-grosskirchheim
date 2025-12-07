@@ -7,13 +7,13 @@ function ShowVorstellungen({ items }) {
   return (
     <>
       {items.map((item) => {
-        const preview = loadCover(item["media-folder"]);
+        const img = loadCover(item["media-folder"]);
 
         return (
           <Link key={item.id} to={`/vorstellungen/${item.id}`} className="item">
-            {preview ? (
+            {img ? (
               <img
-                srcSet={`${preview.small} 400w, ${preview.medium} 700w, ${preview.big} 1200w`}
+                srcSet={`${img.small} 400w, ${img.medium} 700w, ${img.big} 1200w`}
                 sizes="(max-width: 480px) 400px, (max-width: 800px) 700px, 1200px"
                 loading="lazy"
                 alt={item.title}

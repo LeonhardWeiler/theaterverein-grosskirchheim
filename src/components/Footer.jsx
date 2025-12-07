@@ -1,5 +1,3 @@
-import '../main.css'
-
 function Footer() {
   return (
     <ul>
@@ -12,5 +10,3 @@ function Footer() {
 }
 
 export default Footer
-
-

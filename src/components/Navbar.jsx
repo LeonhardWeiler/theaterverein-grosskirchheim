@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import '../main.css'
 
 function Navbar() {
   const [open, setOpen] = useState(false)
@@ -8,18 +7,15 @@ function Navbar() {
   return (
     <>
       <nav className="navbar">
-        {/* Hauptseite-Link immer sichtbar */}
         <NavLink to="/" className="logo">
           Theaterverein Großkirchheim
         </NavLink>
 
-        {/* Desktop Navigation */}
         <ul className="desktop-nav">
           <li><NavLink to="/vorstellungen" className={({isActive}) => isActive ? 'link-highlighted' : ''}>Alle Vorstellungen</NavLink></li>
           <li><NavLink to="/kontakt" className={({isActive}) => isActive ? 'link-highlighted' : ''}>Kontakt</NavLink></li>
         </ul>
 
-        {/* Hamburger für mobile */}
         <button className="hamburger" onClick={() => setOpen(true)}>
           <span></span>
           <span></span>
@@ -27,7 +23,6 @@ function Navbar() {
         </button>
       </nav>
 
-      {/* Fullscreen Overlay Menu */}
       <div className={`mobile-menu ${open ? 'open' : ''}`}>
         <button className="close-btn" onClick={() => setOpen(false)}>×</button>
         <ul>
