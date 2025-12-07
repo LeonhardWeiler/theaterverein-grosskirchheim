@@ -35,12 +35,3 @@ export function loadMedia(folder) {
   return baseNames.map((baseName) => getImageVariants(folder, baseName));
 }
 
-/**
- * Lädt das erste Bild eines Ordners
- */
-export function loadFirstImage(folder) {
-  const baseNames = getBaseNames(folder);
-  if (!baseNames.length) return null;
-  return getImageVariants(folder, baseNames[0]);
-}
-

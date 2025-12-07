@@ -13,6 +13,7 @@ dist-ssr
 *.local
 .publish/
 /src/assets/
+/public/assets/
 
 # Editor directories and files
 .vscode/*

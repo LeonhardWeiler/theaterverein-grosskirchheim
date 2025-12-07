@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import SmartImage from "./SmartImage";
-import { loadFirstImage } from "../utils/loadMedia";
+import { loadCover } from "../utils/loadCover";
 
 function ShowVorstellungen({ items }) {
   if (!items.length) return <p>Keine Ergebnisse gefunden</p>;
@@ -8,7 +8,7 @@ function ShowVorstellungen({ items }) {
   return (
     <>
       {items.map((item) => {
-        const preview = loadFirstImage(item["media-folder"]);
+        const preview = loadCover(item["media-folder"]);
 
         return (
           <Link key={item.id} to={`/vorstellungen/${item.id}`} className="item">

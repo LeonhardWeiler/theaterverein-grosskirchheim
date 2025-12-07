@@ -1,0 +1,35 @@
+#!/bin/bash
+
+BASE_DIR="./src/assets"
+
+for folder in "$BASE_DIR"/*; do
+  IMAGES_DIR="$folder/images"
+  COVER_DIR="$folder/cover"
+
+  # Prüfen, ob images existiert
+  if [ -d "$IMAGES_DIR" ]; then
+    echo "Verarbeite $IMAGES_DIR ..."
+
+    # Cover-Ordner erstellen, falls nicht vorhanden
+    mkdir -p "$COVER_DIR"
+
+    # Alle Basisnamen der Bilder ermitteln (ohne -big/-medium/-small)
+    baseNames=$(ls "$IMAGES_DIR" | sed -E 's/-?(big|medium|small)?\.webp$//' | sort | uniq)
+
+    # Die erste Basis nehmen
+    firstBase=$(echo "$baseNames" | head -n 1)
+
+    echo "Erste Basis: $firstBase"
+
+    # Für jede Variante kopieren
+    for variant in big medium small; do
+      srcFile="$IMAGES_DIR/${firstBase}-${variant}.webp"
+      if [ -f "$srcFile" ]; then
+        cp -v "$srcFile" "$COVER_DIR/${firstBase}-${variant}.webp"
+      fi
+    done
+  fi
+done
+
+echo "Fertig!"
+
