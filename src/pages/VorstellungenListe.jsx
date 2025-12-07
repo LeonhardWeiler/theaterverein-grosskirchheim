@@ -1,19 +1,18 @@
 import { useState } from "react";
 import ShowVorstellungen from "../components/ShowVorstellungen";
 import vorstellungenData from "../data/vorstellungen.json";
-import blurHashData from "../data/blurhash.json";
 
 function VorstellungenListe() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedYear, setSelectedYear] = useState(null);
   const items = Object.entries(vorstellungenData).map(([id, item]) => ({id, ...item }));
-  const years = Array.from(new Set(items.map((i) => parseInt(i.date)))).sort((a, b) => a - b);
+  const years = Array.from(new Set(items.map((i) => parseInt(i.year)))).sort((a, b) => a - b);
 
   const filteredItems = items
     .filter((item) =>
       item.title.toLowerCase().includes(searchTerm.toLowerCase())
     )
-    .filter((item) => (selectedYear ? parseInt(item.date) === selectedYear : true));
+    .filter((item) => (selectedYear ? parseInt(item.year) === selectedYear : true));
 
   return (
     <div className="vorstellungen-page">
@@ -47,7 +46,7 @@ function VorstellungenListe() {
       </div>
 
       <ul className="items-list">
-        <ShowVorstellungen items={filteredItems} blurHash={blurHashData} />
+        <ShowVorstellungen items={filteredItems} />
       </ul>
     </div>
   );

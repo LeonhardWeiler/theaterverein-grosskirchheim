@@ -3,55 +3,63 @@
     "title": "Leberkäse und rote Strapse",
     "content": "",
     "media-folder": "2014-leberkaes-und-rote-strapse",
-    "date": "2014"
+    "year": "2014",
+    "image-count": 76
   },
   "2": {
     "title": "Urlaub auf Balkonien",
     "content": "",
     "media-folder": "2015-urlaub-auf-balkonien",
-    "date": "2015"
+    "year": "2015",
+    "image-count": 54
   },
   "3": {
     "title": "Für die Familie kann man nichts",
     "content": "",
     "media-folder": "2016-fuer-die-famylie-kann-man-nichts",
-    "date": "2016"
+    "year": "2016",
+    "image-count": 41
   },
   "4": {
     "title": "Wer schön sein will muss leiden",
     "content": "",
     "media-folder": "2017-wer-schoensein-will-muss-leiden",
-    "date": "2017"
+    "year": "2017",
+    "image-count": 119
   },
   "5": {
     "title": "Neurosige Zeiten",
     "content": "",
     "media-folder": "2019-neurosige-zeiten",
-    "date": "2019"
+    "year": "2019",
+    "image-count": 40
   },
   "6": {
     "title": "Pension Hollywood",
     "content": "",
     "media-folder": "2020-pension-holywood",
-    "date": "2020"
+    "year": "2020",
+    "image-count": 30
   },
   "7": {
     "title": "Schmuckeralm",
     "content": "",
     "media-folder": "2023-schmuckeralm",
-    "date": "2023"
+    "year": "2023",
+    "image-count": 33
   },
   "8": {
     "title": "Döner Durst und Dosenwurst",
     "content": "",
     "media-folder": "2024-doener-durst-und-dosenwurst",
-    "date": "2024"
+    "year": "2024",
+    "image-count": 34
   },
   "9": {
-    "title": "Für immer Dico",
+    "title": "Für immer Disco",
     "content": "",
-    "media-folder": "2025-fuer-immer-dico",
-    "date": "2025"
+    "media-folder": "2025-fuer-immer-disco",
+    "year": "2025",
+    "image-count": 29
   }
 }
-

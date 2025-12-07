@@ -1,10 +1,15 @@
-import { useState } from "react";
-import SmartImage from "./SmartImage";
+import { useEffect, useState } from "react";
 import { loadMedia } from "../utils/loadMedia";
 
-function ImageCarousel({ folder }) {
-  const images = loadMedia(folder);
+function ImageCarousel({ folder, imageCount }) {
+  const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Bildpfade laden (nur Metadaten)
+  useEffect(() => {
+    const media = loadMedia(folder, imageCount);
+    setImages(media);
+  }, [folder, imageCount]);
 
   if (!images.length) return <p>Keine Bilder gefunden.</p>;
 
@@ -17,12 +22,12 @@ function ImageCarousel({ folder }) {
 
   return (
     <div className="carousel-container">
-      <SmartImage
-        full={img.big}
-        w700={img.medium}
-        w400={img.small}
-        lq={img.lq}
-        alt={`Bild ${img.id}`}
+      <img
+        srcSet={`${img.small} 400w, ${img.medium} 700w, ${img.big} 1200w`}
+        sizes="(max-width: 480px) 400px, (max-width: 800px) 700px, 1200px"
+        loading="lazy"
+        alt={`Bild ${currentIndex + 1}`}
+        className="item-image"
       />
       <button className="carousel-btn left" onClick={prevImage}>
         ‹

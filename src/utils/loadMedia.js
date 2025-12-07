@@ -1,37 +1,38 @@
-// Lazy-Pfade für WebP-Bilder
-const mediaFiles = import.meta.glob("/src/assets/**/images/*.webp");
-
 /**
- * Gibt die Basisnamen aller Bilder eines Ordners zurück
- */
-export function getBaseNames(folder) {
-  const prefix = `/src/assets/${folder}/images/`;
-  return Object.keys(mediaFiles)
-    .filter((path) => path.startsWith(prefix))
-    .map((path) => path.split("/").pop())
-    .map((file) => file.replace(/\.webp$/, ""))           // .webp entfernen
-    .map((file) => file.replace(/-(big|medium|small|lq)$/, "")) // Varianten entfernen
-    .filter((v, i, a) => a.indexOf(v) === i); // unique
-}
-
-/**
- * Gibt die Pfade aller Varianten eines Bildes zurück
+ * Erzeugt alle Bildvarianten für einen Basenamen
  */
 export function getImageVariants(folder, baseName) {
+  const basePath = `/assets/${folder}/images/`;
+
   return {
     id: baseName,
-    big: `/src/assets/${folder}/images/${baseName}-big.webp`,
-    medium: `/src/assets/${folder}/images/${baseName}-medium.webp`,
-    small: `/src/assets/${folder}/images/${baseName}-small.webp`,
-    lq: `/src/assets/${folder}/images/${baseName}-lq.webp`,
+    big: `${basePath}${baseName}-big.webp`,
+    medium: `${basePath}${baseName}-medium.webp`,
+    small: `${basePath}${baseName}-small.webp`,
   };
 }
 
 /**
- * Lädt alle Bilder eines Ordners
+ * Erzeugt die Liste aller Basenamen
+ * Beispiel: count = 3 → ["0001", "0002", "0003"]
  */
-export function loadMedia(folder) {
-  const baseNames = getBaseNames(folder);
-  return baseNames.map((baseName) => getImageVariants(folder, baseName));
+export function generateBaseNames(count) {
+  return Array.from({ length: count }, (_, i) =>
+    String(i + 1).padStart(4, "0")
+  );
+}
+
+/**
+ * Lädt alle Bilder eines Ordners
+ * Parameter:
+ *  - folder (String)
+ *  - count  (Number) wie viele Bilder, z. B. 123
+ */
+export function loadMedia(folder, count) {
+  const baseNames = generateBaseNames(count);
+
+  return baseNames.map((baseName) => {
+    return getImageVariants(folder, baseName);
+  });
 }
 

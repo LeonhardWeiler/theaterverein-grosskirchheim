@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+JSON_FILE="./src/data/vorstellungen.json"
+BASE_PATH="./public/assets"
+
+# Backup der Originaldatei
+cp "$JSON_FILE" "${JSON_FILE}.bak"
+
+# Neue JSON-Datei schrittweise aufbauen
+tmpfile=$(mktemp)
+
+jq 'to_entries' "$JSON_FILE" | jq -c '.[]' | while read -r entry; do
+    key=$(echo "$entry" | jq -r '.key')
+    media_folder=$(echo "$entry" | jq -r '.value["media-folder"]')
+
+    image_path="${BASE_PATH}/${media_folder}/images"
+
+    # Prüfen, ob der Ordner existiert
+    if [[ -d "$image_path" ]]; then
+        # Größter Bildindex extrahieren (z. B. 0005-big.webp → 5)
+        max_number=$(ls "$image_path"/*.webp 2>/dev/null \
+            | sed -E 's/.*\/([0-9]{4})-.*\.webp/\1/' \
+            | sort -n \
+            | tail -n 1)
+
+        # Falls keine Bilder vorhanden → 0
+        if [[ -z "$max_number" ]]; then
+            max_number=0
+        else
+            # führende Nullen entfernen
+            max_number=$((10#$max_number))
+        fi
+    else
+        max_number=0
+    fi
+
+    # JSON Eintrag erweitern
+    updated=$(echo "$entry" | jq --argjson count "$max_number" '.value["image-count"] = $count')
+
+    echo "$updated" >> "$tmpfile"
+done
+
+# JSON wieder zusammensetzen
+jq -s 'map({(.key): .value}) | add' "$tmpfile" > "$JSON_FILE"
+
+rm "$tmpfile"
+
+echo "✔ vorstellungen.json aktualisiert!"
+echo "Backup gespeichert in ${JSON_FILE}.bak"
+
