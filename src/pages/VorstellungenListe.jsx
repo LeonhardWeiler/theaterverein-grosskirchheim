@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ShowVorstellungen from "../components/ShowVorstellungen";
 import vorstellungenData from "../data/vorstellungen.json";
+import blurHashData from "../data/blurhash.json";
 
 function VorstellungenListe() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -46,7 +47,7 @@ function VorstellungenListe() {
       </div>
 
       <ul className="items-list">
-        <ShowVorstellungen items={filteredItems} />
+        <ShowVorstellungen items={filteredItems} blurHash={blurHashData} />
       </ul>
     </div>
   );
