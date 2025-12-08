@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { loadMedia } from "../utils/loadMedia";
+import { loadMedia } from "../../utils/loadMedia";
 import CarouselThumbnails from "./CarouselThumbnails";
 import ZoomModal from "./ZoomModal";
 import CarouselMainImage from "./CarouselMainImage";

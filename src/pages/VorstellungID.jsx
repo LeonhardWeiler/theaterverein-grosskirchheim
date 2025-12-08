@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import ImageCarousel from "../components/ImageCarousel";
+import ImageCarousel from "../components/carousel/ImageCarousel";
 import vorstellungenData from "../data/vorstellungen.json";
 
 function VorstellungID() {
