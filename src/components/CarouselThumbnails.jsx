@@ -31,7 +31,7 @@ function CarouselThumbnails({ images, currentIndex, onSelect }) {
           key={idx}
           ref={el => (refs.current[idx] = el)}
           data-index={idx}
-          src={visible[idx] ? t.small : ""}
+          src={visible[idx] ? t.small : null}
           alt="thumbnail"
           className={`carousel-thumb ${idx === currentIndex ? "active" : ""}`}
           onClick={() => onSelect(idx)}
