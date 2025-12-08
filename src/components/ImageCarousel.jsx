@@ -28,9 +28,9 @@ function ImageCarousel({ folder, imageCount }) {
 
   useEffect(() => {
     const handleKey = (e) => {
-      if (zoomOpen) return;
       if (e.key === "ArrowLeft") prevImage();
       if (e.key === "ArrowRight") nextImage();
+      if (e.key === "Escape") setZoomOpen(false);
     };
 
     window.addEventListener("keydown", handleKey);
@@ -100,14 +100,27 @@ function ImageCarousel({ folder, imageCount }) {
 
       {/* ---------- ZOOM MODAL ---------- */}
       {zoomOpen && (
-        <div className="zoom-overlay" onClick={() => setZoomOpen(false)}>
-          <img
-            src={img.big}
-            alt="Zoom"
-            className="zoom-image"
-            onClick={(e) => e.stopPropagation()}
-          />
-          <button className="zoom-close" onClick={() => setZoomOpen(false)}>×</button>
+        <div
+          className="carousel-container"
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+        >
+          <div className="zoom-overlay" onClick={() => setZoomOpen(false)}>
+            <img
+              src={img.big}
+              alt="Zoom"
+              className="zoom-image"
+              onClick={(e) => e.stopPropagation()}
+            />
+            <button className="zoom-close" onClick={() => setZoomOpen(false)}>×</button>
+          </div>
+          {currentIndex > 0 && (
+            <button className="carousel-btn zoom-btn left" onClick={prevImage}>‹</button>
+          )}
+
+          {currentIndex < images.length - 1 && (
+            <button className="carousel-btn zoom-btn right" onClick={nextImage}>›</button>
+          )}
         </div>
       )}
     </>
