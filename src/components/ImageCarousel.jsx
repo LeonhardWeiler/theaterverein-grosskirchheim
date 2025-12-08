@@ -92,6 +92,7 @@ function ImageCarousel({ folder, imageCount }) {
             key={idx}
             src={t.small}
             alt="thumbnail"
+            loading="lazy"
             className={`carousel-thumb ${idx === currentIndex ? "active" : ""}`}
             onClick={() => setCurrentIndex(idx)}
           />

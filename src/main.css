@@ -361,15 +361,11 @@ main {
   margin-top: 12px;
   padding: 0.7rem;
 
-  overflow-x: auto;       /* Horizontal scrollen */
+  overflow-x: scroll;
   overflow-y: hidden;
-  white-space: nowrap;    /* Kein Umbruch */
-  padding-bottom: 8px;    /* Optional: Platz für Scrollbar */
+  white-space: nowrap;
+  padding-bottom: 8px;
   scroll-behavior: smooth;
-}
-
-.carousel-thumbnail::-webkit-scrollbar {
-  height: 6px;
 }
 
 .carousel-thumb {
