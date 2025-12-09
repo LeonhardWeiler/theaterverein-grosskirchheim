@@ -13,11 +13,10 @@ function ShowVorstellungen({ items }) {
           <Link key={item.id} to={`/vorstellungen/${item.id}`} className="item">
             {img ? (
               <img
-                srcSet={`${img.small} 400w, ${img.medium} 700w, ${img.big} 1200w`}
-                sizes="(max-width: 480px) 400px, (max-width: 800px) 700px, 1200px"
+                srcSet={` ${img.small} 400w, ${img.medium} 700w, ${img.big} 1200w `}
+                sizes=" (max-width: 600px) 100vw, (max-width: 900px) 50vw, (max-width: 1200px) 33vw, 25vw "
                 loading="lazy"
                 alt={item.title}
-                className="item-image"
               />
             ) : (
               <div className="item-image">Kein Bild</div>
