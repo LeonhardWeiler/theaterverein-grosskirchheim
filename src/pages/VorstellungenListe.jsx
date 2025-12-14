@@ -46,9 +46,9 @@ function VorstellungenListe() {
         ))}
       </div>
 
-      <ul className="items-list">
-        <ShowVorstellungen items={filteredItems} />
-      </ul>
+      <div className="items-list">
+        <ShowVorstellungen items={filteredItems} selectedYear={selectedYear} />
+      </div>
     </div>
   );
 }

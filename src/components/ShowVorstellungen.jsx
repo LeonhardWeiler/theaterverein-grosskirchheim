@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { loadCover } from "../utils/loadCover";
 
-function ShowVorstellungen({ items }) {
+function ShowVorstellungen({ items, selectedYear }) {
+  const itemsCount = items.length;
   if (!items.length) return <p>Keine Ergebnisse gefunden</p>;
 
   return (
@@ -9,14 +10,16 @@ function ShowVorstellungen({ items }) {
       {items.map((item) => {
         const img = loadCover(item["media-folder"]);
 
+        const imgSrc = itemsCount === 1 ? img?.big : img?.medium;
+
         return (
-          <Link key={item.id} to={`/vorstellungen/${item.id}`} className="item">
-            {img ? (
+          <Link key={`${item.id}-${selectedYear}`} to={`/vorstellungen/${item.id}`} className="item">
+            {imgSrc ? (
               <img
-                srcSet={` ${img.small} 400w, ${img.medium} 700w, ${img.big} 1200w `}
-                sizes=" (max-width: 600px) 100vw, (max-width: 900px) 50vw, (max-width: 1200px) 33vw, 25vw "
+                src={imgSrc}
                 loading="lazy"
                 alt={item.title}
+                className="item-image"
               />
             ) : (
               <div className="item-image">Kein Bild</div>

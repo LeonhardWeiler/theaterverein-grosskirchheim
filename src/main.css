@@ -293,14 +293,10 @@ main {
 }
 
 .item-image {
-  background-color: var(--grey-800);
-  font-weight: bold;
-  display: grid;
-  place-items: center;
-  max-height: 80%;
-  aspect-ratio: 16 / 9;
-  min-height: 200px;
+  display: block;
   width: 100%;
+  min-height: 200px;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
 }
 
