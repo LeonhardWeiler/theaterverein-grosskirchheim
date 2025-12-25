@@ -1,0 +1,38 @@
+import { useEffect, useRef, useState } from "react";
+import { loadMedia } from "../../../utils/loadMedia";
+
+export function useCarouselImages(folder, imageCount, currentIndex) {
+  const [images, setImages] = useState([]);
+  const preloaded = useRef(new Set());
+
+  useEffect(() => {
+    const media = loadMedia(folder, imageCount);
+    const valid = Array.isArray(media)
+      ? media.filter(img => img && img.big)
+      : [];
+
+    console.log(media[2].big)
+    setImages(valid);
+  }, [folder, imageCount]);
+
+  // Preload next images
+  useEffect(() => {
+    if (!images.length) return;
+
+    const RANGE = 5;
+    for (let i = 1; i <= RANGE; i++) {
+      const idx = currentIndex + i;
+      if (idx >= images.length) break;
+
+      const src = images[idx].big;
+      if (!preloaded.current.has(src)) {
+        const img = new Image();
+        img.src = src;
+        preloaded.current.add(src);
+      }
+    }
+  }, [currentIndex, images]);
+
+  return images;
+}
+
