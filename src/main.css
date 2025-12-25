@@ -9,21 +9,16 @@
 }
 
 :root {
-  --success: #2E8B57;
-  --warning: #FF8C00;
-  --danger: #DC143C;
-  --info: #1E90FF;
+  --dark: #1F262C;
+  --darker: #13181C;
+  --light: #FFEBD9;
+  --lighter: #FFF6ED;
+  --accent: #EC8850;
+  --accent-translucent: rgba(236, 136, 80, 0);
+}
 
-  --grey-50: #F9FAFB;
-  --grey-100: #F3F4F6;
-  --grey-200: #E5E7EB;
-  --grey-300: #D1D5DB;
-  --grey-400: #9CA3AF;
-  --grey-500: #6B7280;
-  --grey-600: #4B5563;
-  --grey-700: #374151;
-  --grey-800: #1F2937;
-  --grey-900: #111827;
+html {
+  background-color: var(--lighter);
 }
 
 .app-container {
@@ -63,8 +58,8 @@ ul {
   justify-content: space-evenly;
   align-items: center;
   padding: 1rem;
-  background-color: var(--grey-900);
-  color: var(--grey-100);
+  background-color: var(--darker);
+  color: var(--lighter);
   width: 100%;
   height: 60px;
   bottom: 0;
@@ -86,10 +81,10 @@ ul {
   display: flex;
   align-items: center;
   padding: 1rem clamp(1rem, 5vw, 4rem);
-  background-color: rgba(243, 244, 246, 0.7);
+  background-color: var(--accent-translucent);
   backdrop-filter: blur(5px);
   width: 100%;
-  color: var(--grey-900);
+  color: var(--darker);
   position: fixed;
   height: 60px;
   top: 0;
@@ -120,7 +115,7 @@ ul {
 .hamburger span {
   width: 25px;
   height: 3px;
-  background: var(--grey-900);
+  background: var(--darker);
 }
 
 .mobile-menu {
@@ -129,8 +124,8 @@ ul {
   left: 0;
   width: 100%;
   height: 100dvh;
-  background: var(--grey-900);
-  color: var(--grey-100);
+  background: var(--darker);
+  color: var(--lighter);
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -151,7 +146,7 @@ ul {
   background: transparent;
   border: none;
   cursor: pointer;
-  color: var(--grey-100);
+  color: var(--lighter);
 }
 
 /* Links im Overlay */
@@ -192,7 +187,7 @@ ul {
   justify-content: center;
   align-items: center;
   height: 100dvh;
-  color: var(--grey-900);
+  color: var(--darker);
   text-align: center;
 }
 
@@ -201,27 +196,27 @@ ul {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: var(--grey-900);
+  color: var(--darker);
   text-align: center;
 }
 
 .to-start-link {
   margin-top: 1.5rem;
   padding: 0.75rem 1.5rem;
-  background-color: var(--grey-900);
-  color: var(--grey-100);
+  background-color: var(--darker);
+  color: var(--lighter);
   border-radius: 5px;
   transition: background-color 0.1s ease;
 
   &:hover, &:focus {
-    background-color: var(--grey-700);
+    background-color: var(--dark);
   }
 }
 
 main {
   margin-inline: clamp(1rem, 5vw, 4rem);
   margin-block: 4rem;
-  color: var(--grey-900);
+  color: var(--darker);
 }
 
 .vorstellungen-page {
@@ -233,13 +228,14 @@ main {
 .search-input {
   padding: 8px;
   border-radius: 4px;
-  border: 1px solid var(--grey-300);
+  border: 1px solid var(--dark);
   font-size: 1rem;
   width: 100%;
   transition: outline 0.1s ease-in-out;
+  background-color: var(--lighter);
 
   &:focus, &:hover {
-    outline: 2px solid var(--grey-900);
+    outline: 2px solid var(--darker);
   }
 }
 
@@ -255,18 +251,18 @@ main {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  background: var(--grey-200);
-  color: var(--grey-900);
+  background: var(--dark);
+  color: var(--lighter);
   transition: background-color 0.2s ease;
 }
 
 .year-btn:hover {
-  background: var(--grey-300);
+  background: var(--darker);
 }
 
 .year-btn.selected {
-  background: var(--grey-900);
-  color: var(--grey-100);
+  background: var(--accent);
+  color: var(--dark);
 }
 
 .items-list {
@@ -276,17 +272,17 @@ main {
 }
 
 .item {
-  border: 1px solid var(--grey-400);
+  border: 1px solid var(--light);
   border-radius: 8px;
   overflow: hidden;
-  background-color: var(--grey-900);
-  color: var(--grey-100);
+  background-color: var(--darker);
+  color: var(--lighter);
   transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
 
   &:hover,
   &:focus {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transform: scale(1.03);
+    transform: scale(101%);
   }
 
   &:only-child:hover,
@@ -322,7 +318,7 @@ main {
   object-fit: contain;
   opacity: 1;
   transition: opacity 0.4s ease;
-  background-color: var(--grey-200);
+  background-color: var(--light);
   padding: 1rem;
 }
 
@@ -332,7 +328,7 @@ main {
   top: 50%;
   transform: translateY(-50%);
   background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  color: var(--lighter);
   border: none;
   border-radius: 50%;
   width: 40px;
@@ -375,7 +371,7 @@ main {
   opacity: 0.6;
   cursor: pointer;
   transition: opacity 0.2s ease, transform 0.2s ease;
-  background-color: var(--grey-200);
+  background-color: var(--light);
 }
 
 .carousel-thumb:hover {
@@ -414,7 +410,7 @@ main {
   font-size: 2.5rem;
   background: none;
   border: none;
-  color: var(--grey-100);
+  color: var(--lighter);
   cursor: pointer;
 }
 
