@@ -31,10 +31,10 @@ html {
   flex: 1;
 }
 
-a {
+a:not(.btn) {
   color: inherit;
   text-decoration: none;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease-in-out;
 
   &:hover, &:focus {
     transform: translateY(-2px);
@@ -200,23 +200,35 @@ ul {
   text-align: center;
 }
 
-.to-start-link {
+.btn {
   margin-top: 1.5rem;
   padding: 0.75rem 1.5rem;
   background-color: var(--darker);
   color: var(--lighter);
   border-radius: 5px;
-  transition: background-color 0.1s ease;
+  transition: background-color 0.1s ease-in-out, transform 0.2s ease-in-out;
+  text-decoration: none;
 
   &:hover, &:focus {
     background-color: var(--dark);
+    transform: translateY(-2px);
   }
 }
 
 main {
-  margin-inline: clamp(1rem, 5vw, 4rem);
-  margin-block: 4rem;
   color: var(--darker);
+
+  & > *:first-child:not(.no-top-margin) {
+    padding-top: 4rem;
+  }
+
+  & > *:last-child:not(.no-bottom-margin) {
+    padding-bottom: 4rem;
+  }
+
+  & > *:not(.full-width) {
+    padding-inline: clamp(1rem, 5vw, 4rem);
+  }
 }
 
 .vorstellungen-page {
@@ -301,6 +313,7 @@ main {
 
 .item-text {
   padding: 8px 12px;
+  color: var(--lighter);
 }
 
 /* Container */
@@ -427,3 +440,71 @@ main {
   right: 1rem;
 }
 
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 90dvh;
+  overflow: hidden;
+  margin-bottom: 0;
+
+  .hero-img {
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    filter: brightness(70%);
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+  }
+
+  h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--lighter);
+    font-size: clamp(2rem, 8vw, 5rem);
+    font-weight: bold;
+    --transform-amount: clamp(10px, 5vw, 100px);
+    z-index: 2;
+
+    .w1 {
+      display: inline-block;
+      transform: translateX(calc(var(--transform-amount) * -1));
+    }
+    .w2 {
+      display: inline-block;
+      transform: translateX(var(--transform-amount));
+    }
+  }
+}
+
+.all-shows {
+  margin-block: clamp(0.2rem, 2vw, 2rem);
+}
+
+.accent-bg {
+  background-color: var(--accent);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+  padding: 2rem;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+
+  h2 {
+    font-weight: 900;
+    font-size: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  p {
+    max-width: clamp(40ch, 50%, 70ch);
+  }
+}
