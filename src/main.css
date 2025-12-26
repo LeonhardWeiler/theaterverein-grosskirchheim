@@ -19,6 +19,7 @@
 
 html {
   background-color: var(--lighter);
+  scroll-behavior: smooth;
 }
 
 .app-container {
@@ -443,7 +444,7 @@ main {
 .hero {
   position: relative;
   width: 100vw;
-  height: 90svh;
+  height: 95svh;
   overflow: hidden;
   margin-bottom: 0;
 
@@ -457,9 +458,22 @@ main {
     filter: brightness(80%);
   }
 
-  .overlay {
+  .scroll-down-indicator {
     position: absolute;
-    inset: 0;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--lighter);
+    width: 80px;
+    stroke: 0;
+
+    &:hover, &:focus {
+      transform: translateX(-50%) translateY(-5px);
+    }
+
+    & > svg {
+      fill: var(--lighter);
+    }
   }
 
   h1 {
