@@ -460,11 +460,11 @@ main {
 
   .scroll-down-indicator {
     position: absolute;
-    bottom: 1rem;
+    bottom: 5%;
     left: 50%;
     transform: translateX(-50%);
     color: var(--lighter);
-    width: 80px;
+    width: 3rem;
     stroke: 0;
 
     &:hover, &:focus {
@@ -482,7 +482,7 @@ main {
     left: 50%;
     transform: translate(-50%, -50%);
     color: var(--lighter);
-    font-size: clamp(2rem, 8vw, 5rem);
+    font-size: clamp(2rem, 8vw, 7rem);
     font-weight: bold;
     --transform-amount: clamp(1px, 5vw, 100px);
     z-index: 2;
@@ -527,5 +527,9 @@ main {
 
   p {
     max-width: clamp(40ch, 50%, 70ch);
+  }
+
+  .btn {
+    margin-top: 0;
   }
 }
