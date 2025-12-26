@@ -462,7 +462,7 @@ main {
 
   .scroll-down-indicator {
     position: absolute;
-    bottom: 5%;
+    bottom: 10%;
     left: 50%;
     transform: translateX(-50%);
     color: var(--lighter);
@@ -586,3 +586,13 @@ main {
   }
 }
 
+.all-people {
+  padding-bottom: 0 !important;
+
+  .all-people-img {
+    width: 100%;
+    max-height: 35vw;
+    object-fit: cover;
+    object-position: 50% 75%;
+  }
+}

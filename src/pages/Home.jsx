@@ -35,7 +35,8 @@ function Home() {
           <Link to="/vorstellungen" className="btn">Zu den Vorstellungen</Link>
         </div>
       </section>
-      <section className="all-people">
+      <section className="all-people full-width">
+        <img className="all-people-img" src="/assets/2025-fuer-immer-disco/images/0014-big.webp" alt="Theatergruppe" className="all-people-img" />
       </section>
     </>
   )
