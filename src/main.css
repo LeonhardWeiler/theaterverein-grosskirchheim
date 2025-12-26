@@ -14,7 +14,7 @@
   --light: #FFEBD9;
   --lighter: #FFF6ED;
   --accent: #EC8850;
-  --accent-translucent: rgba(236, 136, 80, 0);
+  --accent-translucent: #13181C3A;
 }
 
 html {
@@ -105,19 +105,34 @@ ul {
 }
 
 .hamburger {
-  display: none;
+  display: none; /* ggf. für mobile sichtbar machen */
   flex-direction: column;
+  align-items: flex-end;
   gap: 4px;
   background: transparent;
   border: none;
   cursor: pointer;
-  transition: opacity 0.2s ease-in-out;
+  overflow: hidden;
+  transition: opacity 0.2s ease-in-out, transform 0.1s cubic;
 }
 
+/* Hover Effekt auf Hamburger */
+.hamburger:hover span:nth-child(2),
+.hamburger:focus span:nth-child(2) {
+  transform: translateX(0);
+}
+
+/* Hamburger Striche */
 .hamburger span {
   width: 25px;
   height: 3px;
   background: var(--lighter);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Ausgangsposition für mittleren Strich */
+.hamburger span:nth-child(2) {
+  transform: translateX(10px);
 }
 
 .mobile-menu {
@@ -247,10 +262,11 @@ main {
   font-size: 1rem;
   width: 100%;
   transition: outline 0.1s ease-in-out;
-  background-color: var(--lighter);
+  background-color: var(--darker);
+  color: var(--lighter);
 
   &:focus, &:hover {
-    outline: 2px solid var(--darker);
+    outline: 2px solid var(--light);
   }
 }
 
@@ -334,7 +350,7 @@ main {
   object-fit: contain;
   opacity: 1;
   transition: opacity 0.4s ease;
-  background-color: var(--light);
+  background-color: var(--dark);
   padding: 1rem;
 }
 
@@ -371,12 +387,14 @@ main {
   gap: 8px;
   margin-top: 12px;
   padding: 0.7rem;
+  background-color: var(--dark);
 
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
   padding-bottom: 8px;
   scroll-behavior: smooth;
+  border-radius: 8px;
 }
 
 .carousel-thumb {
@@ -458,6 +476,7 @@ main {
     height: 100%;
     user-select: none;
     filter: brightness(80%);
+    background-color: var(--dark);
   }
 
   .scroll-down-indicator {
@@ -513,7 +532,7 @@ main {
 }
 
 .all-shows {
-  padding-block: clamp(1rem, 6vw, 5rem);
+  padding-block: clamp(0.5rem, 6vw, 3rem);
   background-color: var(--lighter);
   display: grid;
   color: var(--darker);
@@ -529,7 +548,7 @@ main {
   text-align: center;
   padding: 2rem;
   font-size: clamp(1rem, 3vw, 1.2rem);
-  max-width: 1000px;
+  max-width: 1300px;
 
   p {
     max-width: clamp(40ch, 50%, 70ch);

@@ -36,7 +36,7 @@ function Home() {
         </div>
       </section>
       <section className="all-people full-width">
-        <img className="all-people-img" src="/assets/2025-fuer-immer-disco/images/0014-big.webp" alt="Theatergruppe" className="all-people-img" />
+        <img src="/assets/2025-fuer-immer-disco/images/0014-big.webp" alt="Theatergruppe" className="all-people-img" />
       </section>
     </>
   )
