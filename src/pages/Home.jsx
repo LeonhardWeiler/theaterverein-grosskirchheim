@@ -22,10 +22,15 @@ function Home() {
         </a>
       </section>
       <section id="about-us" className="about-us">
+        <div className="about-us-text">
+          <h2 className="heading-home">Über uns</h2>
+          <p>Das Theater Großkirchheim ist eine leidenschaftliche Gemeinschaft von Theaterliebhabern, die sich der Kunst des Theaters verschrieben haben. Seit unserer Gründung im Jahr 1985 haben wir es uns zur Aufgabe gemacht, qualitativ hochwertige Theateraufführungen zu präsentieren und die kulturelle Vielfalt unserer Region zu bereichern.</p>
+        </div>
+        <img src={getLatestCoverSrc()} alt="Über uns" className="about-us-img" />
       </section>
       <section className="all-shows">
         <div className="accent-bg">
-          <h2>Alle Vorstellungen</h2>
+          <h2 className="heading-home">Alle Vorstellungen</h2>
           <p>Entdecke unsere vielfältigen Theateraufführungen, von klassischen Stücken bis hin zu modernen Inszenierungen. Tauche ein in die Welt des Theaters und erlebe unvergessliche Momente voller Emotionen und Spannung.</p>
           <Link to="/vorstellungen" className="btn">Zu den Vorstellungen</Link>
         </div>
