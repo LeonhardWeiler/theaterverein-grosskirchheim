@@ -108,12 +108,12 @@ ul {
   display: none; /* ggf. für mobile sichtbar machen */
   flex-direction: column;
   align-items: flex-end;
-  gap: 4px;
+  gap: 0.3rem;
   background: transparent;
   border: none;
   cursor: pointer;
   overflow: hidden;
-  transition: opacity 0.2s ease-in-out, transform 0.1s cubic;
+  transition: opacity 0.2s ease-in-out, transform 0.05s cubic;
 }
 
 /* Hover Effekt auf Hamburger */
@@ -125,7 +125,8 @@ ul {
 /* Hamburger Striche */
 .hamburger span {
   width: 25px;
-  height: 3px;
+  height: 2px;
+  border-radius: 25%;
   background: var(--lighter);
   transition: transform 0.2s ease-in-out;
 }
@@ -477,6 +478,7 @@ main {
     user-select: none;
     filter: brightness(80%);
     background-color: var(--dark);
+    border-radius: 0 0 2rem 2rem;
   }
 
   .scroll-down-indicator {
@@ -588,6 +590,7 @@ main {
     place-self: center;
     object-fit: cover;
     object-position: center;
+    border-radius: clamp(0.5rem, 2vw, 1rem);
   }
 }
 

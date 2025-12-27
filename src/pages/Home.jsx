@@ -14,7 +14,7 @@ function getLatestCoverSrc() {
 function Home() {
   return (
     <>
-      <section className="hero">
+      <section className="hero full-width">
         <h1><span className="w1">Theater</span><br></br><span className="w2">Großkirchheim</span></h1>
         <img src={getLatestCoverSrc()} alt="Aktuelle Vorstellung" className="hero-img" />
         <a href="#about-us" className="scroll-down-indicator">
