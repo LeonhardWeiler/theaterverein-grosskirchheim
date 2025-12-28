@@ -130,7 +130,8 @@ ul {
   display: flex;
   gap: 1.5rem;
 
-  a:hover {
+  a:hover,
+  a:focus {
     text-decoration: underline;
   }
 }
@@ -147,7 +148,6 @@ ul {
   transition: opacity 0.2s ease-in-out, transform 0.05s cubic;
 }
 
-/* Hover Effekt auf Hamburger */
 .hamburger:hover span:nth-child(2),
 .hamburger:focus span:nth-child(2) {
   transform: translateX(0);
@@ -295,7 +295,7 @@ main {
   background-color: var(--darker);
   color: var(--lighter);
 
-  &:focus, &:hover {
+  &:hover, &:focus {
     outline: 2px solid var(--light);
   }
 }
@@ -317,7 +317,8 @@ main {
   transition: background-color 0.2s ease;
 }
 
-.year-btn:hover {
+.year-btn:hover,
+.year-btn:focus {
   background: var(--darker);
 }
 
@@ -340,8 +341,7 @@ main {
   color: var(--lighter);
   transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
 
-  &:hover,
-  &:focus {
+  &:hover, &:focus {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transform: scale(101%);
   }
@@ -438,7 +438,8 @@ main {
   background-color: var(--light);
 }
 
-.carousel-thumb:hover {
+.carousel-thumb:hover,
+.carousel-thumb:focus {
   opacity: 0.9;
   transform: scale(1.08);
 }
@@ -646,6 +647,7 @@ main {
   }
 }
 
-.footer-navigation a:hover {
+.footer-navigation a:hover,
+.footer-navigation a:focus {
   text-decoration: underline;
 }
