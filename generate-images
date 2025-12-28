@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
 
-const baseDir = '/public/assets/images';
+const baseDir = './public/assets/images';
 
 const sizes = [
   { suffix: '-big', width: 1200, quality: 80 },
@@ -13,6 +13,7 @@ const sizes = [
 async function processImage(filePath) {
   const ext = path.extname(filePath);
   const base = filePath.replace(ext, '');
+  let success = true;
 
   for (const size of sizes) {
     const outFile = `${base}${size.suffix}${ext}`;
@@ -25,7 +26,18 @@ async function processImage(filePath) {
 
       console.log(`✅ Created/Overwritten: ${outFile}`);
     } catch (err) {
+      success = false;
       console.error(`❌ Error processing ${filePath}:`, err);
+    }
+  }
+
+  // Lösche Originaldatei nur, wenn alle Größen erfolgreich erstellt wurden
+  if (success) {
+    try {
+      fs.unlinkSync(filePath);
+      console.log(`🗑️ Deleted original file: ${filePath}`);
+    } catch (err) {
+      console.error(`❌ Failed to delete original file: ${filePath}`, err);
     }
   }
 }
@@ -39,8 +51,12 @@ function walkFolder(folder) {
 
     if (stat.isDirectory()) {
       walkFolder(fullPath);
-    } else if (stat.isFile() && fullPath.endsWith('.webp')) {
-      processImage(fullPath);
+    } else if (stat.isFile()) {
+      // Prüfe, dass der Name NICHT -small, -medium oder -big enthält
+      const fileName = path.basename(fullPath);
+      if (!/-small|-medium|-big/.test(fileName)) {
+        processImage(fullPath);
+      }
     }
   });
 }
