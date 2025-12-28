@@ -26,7 +26,7 @@ function Home() {
           <h2 className="heading-home">Über uns</h2>
           <p>Das Theater Großkirchheim ist eine leidenschaftliche Gemeinschaft von Theaterliebhabern, die sich der Kunst des Theaters verschrieben haben. Seit unserer Gründung im Jahr 1985 haben wir es uns zur Aufgabe gemacht, qualitativ hochwertige Theateraufführungen zu präsentieren und die kulturelle Vielfalt unserer Region zu bereichern.</p>
         </div>
-        <img src={getLatestCoverSrc()} alt="Über uns" className="about-us-img" />
+        <img loading="lazy" src={getLatestCoverSrc()} alt="Über uns" className="about-us-img" />
       </section>
       <section className="all-shows">
         <div className="accent-bg">
@@ -36,7 +36,7 @@ function Home() {
         </div>
       </section>
       <section className="all-people full-width">
-        <img src="/assets/2025-fuer-immer-disco/images/0014-big.webp" alt="Theatergruppe" className="all-people-img" />
+        <img loading="lazy" src="/assets/2025-fuer-immer-disco/images/0014-big.webp" alt="Theatergruppe" className="all-people-img" />
       </section>
     </>
   )
