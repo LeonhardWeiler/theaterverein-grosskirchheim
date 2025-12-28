@@ -319,7 +319,7 @@ main {
 
 .year-btn:hover,
 .year-btn:focus {
-  background: var(--darker);
+  outline: 2px solid var(--light);
 }
 
 .year-btn.selected {
