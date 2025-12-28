@@ -1,5 +1,5 @@
 function CarouselMainImage({ img, onClick }) {
-  if (!img || !img.big) return null;
+  if (!img || !img.big) return <p>Kein Bild verfügbar</p>;
 
   return (
     <img

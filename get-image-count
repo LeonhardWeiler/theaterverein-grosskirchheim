@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 JSON_FILE="./src/data/vorstellungen.json"
-BASE_PATH="./public/assets"
+BASE_PATH="./public/assets/images"
 
 # Backup der Originaldatei
 cp "$JSON_FILE" "${JSON_FILE}.bak"

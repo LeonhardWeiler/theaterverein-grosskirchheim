@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASE_DIR="./src/assets"
+BASE_DIR="./public/assets/images"
 
 for folder in "$BASE_DIR"/*; do
   IMAGES_DIR="$folder/images"

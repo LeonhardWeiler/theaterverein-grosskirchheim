@@ -1,6 +1,6 @@
 export function loadCover(folder) {
   const baseName = "0001";
-  const basePath = `/assets/${folder}/cover/`;
+  const basePath = `/assets/images/${folder}/cover/`;
 
   return {
     // big: null,

@@ -1,5 +1,5 @@
 export function getImageVariants(folder, baseName) {
-  const basePath = `/assets/${folder}/images/`;
+  const basePath = `/assets/images/${folder}/images/`;
 
   return {
     id: baseName,
