@@ -1,4 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: regular;
+  font-display: swap;
+  src:
+    url("/assets/fonts/Inter-18pt-Regular-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF,
+    U+0131,
+    U+0152-0153,
+    U+02BB-02BC,
+    U+02C6,
+    U+02DA,
+    U+02DC,
+    U+2000-206F,
+    U+2074,
+    U+20AC,
+    U+2122,
+    U+2212,
+    U+2215;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src:
+    url("/assets/fonts/Inter-18pt-Bold-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF,
+    U+0131,
+    U+0152-0153,
+    U+02BB-02BC,
+    U+02C6,
+    U+02DA,
+    U+02DC,
+    U+2000-206F,
+    U+2074,
+    U+20AC,
+    U+2122,
+    U+2212,
+    U+2215;
+}
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -529,7 +571,7 @@ main {
 }
 
 .heading-home {
-  font-weight: 900;
+  font-weight: bold;
   font-size: clamp(1.5rem, 4vw, 3rem);
 }
 
@@ -578,10 +620,7 @@ main {
       line-height: 1.6;
       font-size: clamp(1rem, 3vw, 1.2rem);
       max-width: 50ch;
-      text-align: justify;
-
     }
-
   }
 
   .about-us-img {

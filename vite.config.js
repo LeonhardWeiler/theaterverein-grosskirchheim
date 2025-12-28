@@ -3,6 +3,12 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [
-    react({}),
+    react(),
   ],
+  server: {
+    mimeTypes: {
+      '.woff2': 'font/woff2',
+    },
+  },
 });
+
