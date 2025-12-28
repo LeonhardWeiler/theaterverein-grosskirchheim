@@ -86,6 +86,7 @@ RewriteRule ^index\\.html$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.html [L]
+AddType font/woff2 .woff2
 `.trim() + "\n";
 
     fs.writeFileSync(htaccessPath, htaccessContent, { encoding: "utf8" });
