@@ -308,12 +308,12 @@ main {
 
 .year-grid {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 8px;
 }
 
 .year-btn {
-  flex: 1 1 60px;
+  flex: 1 1 auto;
   padding: 8px;
   border: none;
   border-radius: 4px;
@@ -321,6 +321,7 @@ main {
   background: var(--dark);
   color: var(--lighter);
   transition: background-color 0.2s ease;
+  white-space: nowrap;
 }
 
 .year-btn:hover,
@@ -331,6 +332,20 @@ main {
 .year-btn.selected {
   background: var(--accent);
   color: var(--dark);
+}
+
+.year-select {
+  flex: 1 0 auto;
+  padding: 8px;
+  background: var(--dark);
+  border: none;
+  color: var(--lighter);
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover, &:focus {
+    outline: 1px solid var(--light);
+  }
 }
 
 .items-list {

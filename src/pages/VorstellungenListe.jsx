@@ -1,18 +1,28 @@
 import { useState } from "react";
 import ShowVorstellungen from "../components/ShowVorstellungen";
+import YearSelector from "./YearSelector";
 import vorstellungenData from "../data/vorstellungen.json";
 
 function VorstellungenListe() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedYear, setSelectedYear] = useState(null);
-  const items = Object.entries(vorstellungenData).map(([id, item]) => ({id, ...item }));
-  const years = Array.from(new Set(items.map((i) => parseInt(i.year)))).sort((a, b) => b - a);
+
+  const items = Object.entries(vorstellungenData).map(([id, item]) => ({
+    id,
+    ...item,
+  }));
+
+  const years = Array.from(
+    new Set(items.map((i) => parseInt(i.year)))
+  ).sort((a, b) => b - a);
 
   const filteredItems = items
     .filter((item) =>
       item.title.toLowerCase().includes(searchTerm.toLowerCase())
     )
-    .filter((item) => (selectedYear ? parseInt(item.year) === selectedYear : true))
+    .filter((item) =>
+      selectedYear ? parseInt(item.year) === selectedYear : true
+    )
     .reverse();
 
   return (
@@ -27,24 +37,11 @@ function VorstellungenListe() {
         className="search-input"
       />
 
-      <div className="year-grid">
-        <button
-          onClick={() => setSelectedYear(null)}
-          className={selectedYear === null ? "year-btn selected" : "year-btn"}
-        >
-          Alle
-        </button>
-
-        {years.map((year) => (
-          <button
-            key={year}
-            onClick={() => setSelectedYear(year)}
-            className={selectedYear === year ? "year-btn selected" : "year-btn"}
-          >
-            {year}
-          </button>
-        ))}
-      </div>
+      <YearSelector
+        years={years}
+        selectedYear={selectedYear}
+        setSelectedYear={setSelectedYear}
+      />
 
       <div className="items-list">
         <ShowVorstellungen items={filteredItems} selectedYear={selectedYear} />
