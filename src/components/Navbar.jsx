@@ -16,7 +16,7 @@ function Navbar() {
           <li><NavLink to="/kontakt" className={({isActive}) => isActive ? 'link-highlighted' : ''}>Kontakt</NavLink></li>
         </ul>
 
-        <button className="hamburger" onClick={() => setOpen(true)}>
+        <button aria-label="Hamburgmenü öffnen" className="hamburger" onClick={() => setOpen(true)}>
           <span></span>
           <span></span>
           <span></span>
