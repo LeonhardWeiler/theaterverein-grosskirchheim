@@ -59,7 +59,6 @@
 
 html {
   background-color: var(--lighter);
-  scroll-behavior: smooth;
 }
 
 img {
@@ -335,7 +334,7 @@ main {
 }
 
 .year-select {
-  flex: 1 0 auto;
+  flex: 0 0 auto;
   padding: 8px;
   background: var(--dark);
   border: none;

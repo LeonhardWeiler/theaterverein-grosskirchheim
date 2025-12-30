@@ -1,16 +1,24 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import ImageCarousel from "../components/carousel/ImageCarousel";
 import vorstellungenData from "../data/vorstellungen.json";
 
 function VorstellungID() {
   const { id } = useParams();
   const item = vorstellungenData[id];
+  const navigate = useNavigate();
 
   if (!item) return <p>Lade...</p>;
 
+  const goBack = () => {
+    navigate(-1); // geht zurück im Browser-Verlauf, Scrollposition bleibt
+  };
+
   return (
     <div className="vorstellung-detail">
-      <Link to="/vorstellungen" className="back-link">&lt; Zurück zu Vorstellungen</Link>
+      <button onClick={goBack} className="back-link">
+        &lt; Zurück zu Vorstellungen
+      </button>
+
       <h1>{item.title}</h1>
       <p>{item.year}</p>
 

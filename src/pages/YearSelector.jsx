@@ -15,11 +15,11 @@ function YearSelector({ years, selectedYear, setSelectedYear }) {
       const GAP = 8;
       const SELECT_WIDTH = 150;
 
-      let usedWidth = 0;
-      let count = 0;
-
       const buttons = measureRef.current.children;
       const availableWidth = containerWidth - SELECT_WIDTH;
+
+      let usedWidth = 0;
+      let count = 0;
 
       for (let i = 0; i < buttons.length; i++) {
         const w = buttons[i].offsetWidth + GAP;
@@ -28,16 +28,18 @@ function YearSelector({ years, selectedYear, setSelectedYear }) {
         count++;
       }
 
+      // Direkt slice statt filter
       const visible = years.slice(0, count);
-      const overflow = years.filter((y) => !visible.includes(y));
+      const overflow = years.slice(count);
 
       setVisibleYears(visible);
       setOverflowYears(overflow);
     };
 
     calculate();
+
     const observer = new ResizeObserver(calculate);
-    observer.observe(containerRef.current);
+    if (containerRef.current) observer.observe(containerRef.current);
 
     return () => observer.disconnect();
   }, [years]);
