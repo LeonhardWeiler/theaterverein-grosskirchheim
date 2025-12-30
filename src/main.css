@@ -63,7 +63,7 @@
 }
 
 :focus {
-  outline: 2px solid var(--light);
+  outline: 2px dotted var(--light);
   outline-offset: 2px;
 }
 
