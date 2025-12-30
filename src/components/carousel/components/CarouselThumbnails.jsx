@@ -5,12 +5,13 @@ function CarouselThumbnails({ images, currentIndex, onSelect }) {
   const refs = useRef([]);
 
   function handleClick(idx) {
+    if (idx === currentIndex) return;
     const mainImage = document.querySelector(".carousel-image");
     mainImage?.classList.add("loading");
     onSelect(idx);
   }
 
-  // ------------------ IntersectionObserver ------------------
+  // IntersectionObserver für Lazy-Loading
   useEffect(() => {
     const observer = new IntersectionObserver(
       entries => {
@@ -29,6 +30,18 @@ function CarouselThumbnails({ images, currentIndex, onSelect }) {
 
     return () => observer.disconnect();
   }, [images]);
+
+  // Automatisch scrollen, damit das aktive Thumbnail sichtbar bleibt
+  useEffect(() => {
+    const activeThumb = refs.current[currentIndex];
+    if (activeThumb) {
+      activeThumb.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center" // wichtig für horizontales Scrollen
+      });
+    }
+  }, [currentIndex]);
 
   return (
     <div tabIndex="-1" className="carousel-thumbnails">
