@@ -2,6 +2,7 @@ import { StrictMode, lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
+import './main.css'
 import Layout from './components/Layout.jsx'
 import ErrorPage from './pages/ErrorPage.jsx'
 import NotFound from './pages/NotFound.jsx'
