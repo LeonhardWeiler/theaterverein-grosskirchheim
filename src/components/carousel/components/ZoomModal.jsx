@@ -17,7 +17,7 @@ function ZoomModal({
       <div className="zoom-overlay" onClick={onClose}>
         <img
           src={img.big}
-          alt="Zoom"
+          alt="Vergrößertes Bild im Zoom-Modus"
           className="zoom-image"
           onClick={e => e.stopPropagation()}
         />

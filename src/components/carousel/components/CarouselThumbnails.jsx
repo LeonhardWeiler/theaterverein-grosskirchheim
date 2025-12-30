@@ -4,6 +4,12 @@ function CarouselThumbnails({ images, currentIndex, onSelect }) {
   const [visible, setVisible] = useState({});
   const refs = useRef([]);
 
+  function handleClick(idx) {
+    const mainImage = document.querySelector(".carousel-image");
+    mainImage?.classList.add("loading");
+    onSelect(idx);
+  }
+
   // ------------------ IntersectionObserver ------------------
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -32,9 +38,9 @@ function CarouselThumbnails({ images, currentIndex, onSelect }) {
           ref={el => (refs.current[idx] = el)}
           data-index={idx}
           src={visible[idx] ? t.small : null}
-          alt="thumbnail"
+          alt="kleines Vorschaubild für das Karussell"
           className={`carousel-thumb ${idx === currentIndex ? "active" : ""}`}
-          onClick={() => onSelect(idx)}
+          onClick={() => handleClick(idx)}
         />
       ))}
     </div>

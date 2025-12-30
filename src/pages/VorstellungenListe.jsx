@@ -26,27 +26,32 @@ function VorstellungenListe() {
     .reverse();
 
   return (
-    <div className="vorstellungen-page">
-      <h1>Vorstellungen</h1>
+    <>
+      <div className="site-heading full-width no-top-margin">
+        <h1 className="heading-text">Vorstellungen</h1>
+        <img fetchPriority="high" src="/assets/images/2024-doener-durst-und-dosenwurst/images/0008-big.webp" alt="Foto der Vorstellung von 2024 Döner Durst und Dosenwurst mit Schauspieler:innen auf der Bühne" className="heading-img" loading="eager" />
+      </div>
 
-      <input
-        type="text"
-        placeholder="Suche nach einer Vorstellung..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="search-input"
-      />
+      <div>
+        <input
+          type="text"
+          placeholder="Suche nach einer Vorstellung..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
 
-      <YearSelector
-        years={years}
-        selectedYear={selectedYear}
-        setSelectedYear={setSelectedYear}
-      />
+        <YearSelector
+          years={years}
+          selectedYear={selectedYear}
+          setSelectedYear={setSelectedYear}
+        />
+      </div>
 
       <div className="items-list">
         <ShowVorstellungen items={filteredItems} selectedYear={selectedYear} />
       </div>
-    </div>
+    </>
   );
 }
 
