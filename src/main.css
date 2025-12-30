@@ -57,6 +57,16 @@
   --accent-translucent: #13181C3A;
 }
 
+::selection {
+  background-color: var(--light);
+  color: var(--darker);
+}
+
+:focus {
+  outline: 2px solid var(--light);
+  outline-offset: 2px;
+}
+
 html {
   background-color: var(--darker);
 }
@@ -65,6 +75,7 @@ img {
   background-color: var(--dark);
   display: grid;
   place-items: center;
+  user-select: none;
 }
 
 .app-container {
@@ -162,7 +173,6 @@ ul {
 .hamburger span {
   width: 25px;
   height: 2px;
-  border-radius: 25%;
   background: var(--lighter);
   transition: transform 0.2s ease-in-out;
 }

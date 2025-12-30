@@ -16,7 +16,7 @@ function CarouselThumbnails({ images, currentIndex, onSelect }) {
           }
         });
       },
-      { rootMargin: "200px" } // preload before visible
+      { rootMargin: "200px" }
     );
 
     refs.current.forEach(el => el && observer.observe(el));
@@ -25,7 +25,7 @@ function CarouselThumbnails({ images, currentIndex, onSelect }) {
   }, [images]);
 
   return (
-    <div className="carousel-thumbnails">
+    <div tabIndex="-1" className="carousel-thumbnails">
       {images.map((t, idx) => (
         <img
           key={idx}
