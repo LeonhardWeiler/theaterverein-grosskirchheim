@@ -6,8 +6,14 @@ function ZoomModal({
   hasPrev,
   hasNext,
   onTouchStart,
-  onTouchEnd
+  onTouchEnd,
+  imageRef
 }) {
+
+  function handleLoad() {
+    imageRef?.current?.classList.remove("loading");
+  }
+
   return (
     <div
       className="carousel-container"
@@ -16,10 +22,12 @@ function ZoomModal({
     >
       <div className="zoom-overlay" onClick={onClose}>
         <img
+          ref={imageRef}
           src={img.big}
           alt="Vergrößertes Bild im Zoom-Modus"
           className="zoom-image"
           onClick={e => e.stopPropagation()}
+          onLoad={handleLoad}
         />
         <button className="zoom-close" onClick={onClose}>×</button>
       </div>

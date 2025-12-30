@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useCarouselImages } from "./hooks/useCarouselImages";
 import { useCarouselIndex } from "./hooks/useCarouselIndex";
 import { useCarouselKeyboard } from "./hooks/useCarouselKeyboard";
@@ -12,13 +12,16 @@ import ZoomModal from "./components/ZoomModal";
 function ImageCarousel({ folder, imageCount }) {
   const [zoomOpen, setZoomOpen] = useState(false);
 
+  const mainImageRef = useRef(null);
+  const zoomImageRef = useRef(null);
+
   const images = useCarouselImages(folder, imageCount);
   const {
     currentIndex,
     setCurrentIndex,
     prevImage,
     nextImage
-  } = useCarouselIndex(folder, images.length);
+  } = useCarouselIndex(folder, images.length, mainImageRef, zoomImageRef);
 
   useCarouselKeyboard({
     prev: prevImage,
@@ -34,7 +37,11 @@ function ImageCarousel({ folder, imageCount }) {
     <>
       <CarouselSwipeHandler onSwipeLeft={nextImage} onSwipeRight={prevImage}>
         <div className="carousel-container">
-          <CarouselMainImage img={img} onClick={() => setZoomOpen(true)} />
+          <CarouselMainImage
+            img={img}
+            onClick={() => setZoomOpen(true)}
+            imageRef={mainImageRef}
+          />
 
           <CarouselNavigation
             showPrev={currentIndex > 0}
@@ -59,6 +66,7 @@ function ImageCarousel({ folder, imageCount }) {
           nextImage={nextImage}
           hasPrev={currentIndex > 0}
           hasNext={currentIndex < images.length - 1}
+          imageRef={zoomImageRef}
         />
       )}
     </>

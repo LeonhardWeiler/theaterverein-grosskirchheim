@@ -1,21 +1,41 @@
 import { useCallback, useEffect, useState } from "react";
 
-export function useCarouselIndex(folder, imagesLength) {
+export function useCarouselIndex(folder, imagesLength, mainImageRef, zoomImageRef) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const setIndexWithLoading = useCallback(
+    (idxOrUpdater) => {
+      if (mainImageRef?.current) {
+        mainImageRef.current.classList.add("loading");
+      }
+      if (zoomImageRef?.current) {
+        zoomImageRef.current.classList.add("loading");
+      }
+
+      setCurrentIndex(prev =>
+        typeof idxOrUpdater === "function"
+          ? idxOrUpdater(prev)
+          : idxOrUpdater
+      );
+    },
+    [mainImageRef, zoomImageRef]
+  );
+
   const prevImage = useCallback(() => {
-    setCurrentIndex(i => Math.max(i - 1, 0));
-  }, []);
+    setIndexWithLoading(i => Math.max(i - 1, 0));
+  }, [setIndexWithLoading]);
 
   const nextImage = useCallback(() => {
-    setCurrentIndex(i => Math.min(i + 1, imagesLength - 1));
-  }, [imagesLength]);
+    setIndexWithLoading(i => Math.min(i + 1, imagesLength - 1));
+  }, [setIndexWithLoading, imagesLength]);
 
   // Load saved index
   useEffect(() => {
     const saved = localStorage.getItem(`carousel-${folder}-index`);
-    if (saved) setCurrentIndex(Number(saved) || 0);
-  }, [folder]);
+    if (saved !== null) {
+      setIndexWithLoading(Number(saved) || 0);
+    }
+  }, [folder, setIndexWithLoading]);
 
   // Save index
   useEffect(() => {
@@ -30,13 +50,13 @@ export function useCarouselIndex(folder, imagesLength) {
   // Fix invalid index
   useEffect(() => {
     if (currentIndex >= imagesLength && imagesLength) {
-      setCurrentIndex(0);
+      setIndexWithLoading(0);
     }
-  }, [currentIndex, imagesLength]);
+  }, [currentIndex, imagesLength, setIndexWithLoading]);
 
   return {
     currentIndex,
-    setCurrentIndex,
+    setCurrentIndex: setIndexWithLoading,
     prevImage,
     nextImage
   };

@@ -6,9 +6,7 @@ function CarouselThumbnails({ images, currentIndex, onSelect }) {
 
   function handleClick(idx) {
     if (idx === currentIndex) return;
-    const mainImage = document.querySelector(".carousel-image");
-    mainImage?.classList.add("loading");
-    onSelect(idx);
+    onSelect(idx); // 👈 loading kommt automatisch aus dem Hook
   }
 
   // IntersectionObserver für Lazy-Loading
@@ -31,14 +29,14 @@ function CarouselThumbnails({ images, currentIndex, onSelect }) {
     return () => observer.disconnect();
   }, [images]);
 
-  // Automatisch scrollen, damit das aktive Thumbnail sichtbar bleibt
+  // Aktives Thumbnail sichtbar halten
   useEffect(() => {
     const activeThumb = refs.current[currentIndex];
     if (activeThumb) {
       activeThumb.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
-        inline: "center" // wichtig für horizontales Scrollen
+        inline: "center"
       });
     }
   }, [currentIndex]);
@@ -50,10 +48,11 @@ function CarouselThumbnails({ images, currentIndex, onSelect }) {
           key={idx}
           ref={el => (refs.current[idx] = el)}
           data-index={idx}
-          src={visible[idx] ? t.small : null}
+          src={visible[idx] ? t.small : undefined}
           alt="kleines Vorschaubild für das Karussell"
           className={`carousel-thumb ${idx === currentIndex ? "active" : ""}`}
           onClick={() => handleClick(idx)}
+          loading="lazy"
         />
       ))}
     </div>

@@ -243,8 +243,12 @@ ul {
   justify-content: center;
   align-items: center;
   height: 100svh;
-  color: var(--darker);
   text-align: center;
+  color: var(--lighter);
+
+  a {
+    background-color: var(--dark);
+  }
 }
 
 .not-found-page {
@@ -414,20 +418,21 @@ main {
   padding: 1rem;
 }
 
-.carousel-image.loading {
+.carousel-image.loading,
+.zoom-image.loading {
   animation: pulse 1.5s infinite;
   opacity: 0.5;
 }
 
 @keyframes pulse {
   0% {
-    background-color: var(--dark);
+    opacity: 0.5;
   }
   50% {
-    background-color: var(--darker);
+    opacity: 0.7;
   }
   100% {
-    background-color: var(--dark);
+    opacity: 0.5;
   }
 }
 
