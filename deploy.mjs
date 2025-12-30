@@ -82,11 +82,47 @@ async function main() {
     const htaccessContent = `
 RewriteEngine On
 RewriteBase /
-RewriteRule ^index\\.html$ - [L]
+
+# SPA Routing: index.html für alle nicht-existierenden Dateien
+RewriteRule ^index\.html$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.html [L]
+
+# Fonts
 AddType font/woff2 .woff2
+AddType font/woff .woff
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Bilder 1 Jahr
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+
+  # CSS & JS 1 Jahr
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType application/x-javascript "access plus 1 year"
+
+  # Fonts 1 Jahr
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Assets (CSS, JS, Fonts, Bilder) lange cachen
+  <FilesMatch "\.(js|css|woff2|woff|png|jpg|jpeg|webp|svg)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # HTML kurz cachen
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
 `.trim() + "\n";
 
     fs.writeFileSync(htaccessPath, htaccessContent, { encoding: "utf8" });
