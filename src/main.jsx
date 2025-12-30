@@ -1,16 +1,17 @@
-import { StrictMode } from 'react'
+import { StrictMode, lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import './main.css'
-
-import Home from './pages/Home.jsx'
-import VorstellungenListe from './pages/VorstellungenListe.jsx'
-import VorstellungID from './pages/VorstellungID.jsx'
-import Kontakt from './pages/Kontakt.jsx'
 import Layout from './components/Layout.jsx'
 import ErrorPage from './pages/ErrorPage.jsx'
 import NotFound from './pages/NotFound.jsx'
+import Home from './pages/Home.jsx'
+
+// Lazy load der Seiten
+const VorstellungenListe = lazy(() => import('./pages/VorstellungenListe.jsx'))
+const VorstellungID = lazy(() => import('./pages/VorstellungID.jsx'))
+const Kontakt = lazy(() => import('./pages/Kontakt.jsx'))
 
 const router = createBrowserRouter([
   {
@@ -18,10 +19,10 @@ const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <Home /> },
-      { path: 'vorstellungen', element: <VorstellungenListe /> },
-      { path: 'vorstellungen/:id', element: <VorstellungID /> },
-      { path: 'kontakt', element: <Kontakt /> },
+      { index: true, element: <Suspense fallback={<div>Loading…</div>}><Home /></Suspense> },
+      { path: 'vorstellungen', element: <Suspense fallback={<div>Loading…</div>}><VorstellungenListe /></Suspense> },
+      { path: 'vorstellungen/:id', element: <Suspense fallback={<div>Loading…</div>}><VorstellungID /></Suspense> },
+      { path: 'kontakt', element: <Suspense fallback={<div>Loading…</div>}><Kontakt /></Suspense> },
       { path: '*', element: <NotFound /> }
     ]
   }
@@ -32,3 +33,4 @@ createRoot(document.getElementById('root')).render(
     <RouterProvider router={router} />
   </StrictMode>,
 )
+
