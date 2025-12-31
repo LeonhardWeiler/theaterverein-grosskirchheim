@@ -5,20 +5,28 @@ export function useCarouselIndex(folder, imagesLength, mainImageRef, zoomImageRe
 
   const setIndexWithLoading = useCallback(
     (idxOrUpdater) => {
-      if (mainImageRef?.current) {
-        mainImageRef.current.classList.add("loading");
-      }
-      if (zoomImageRef?.current) {
-        zoomImageRef.current.classList.add("loading");
-      }
+      setCurrentIndex(prev => {
+        const nextIndex =
+          typeof idxOrUpdater === "function"
+            ? idxOrUpdater(prev)
+            : idxOrUpdater;
 
-      setCurrentIndex(prev =>
-        typeof idxOrUpdater === "function"
-          ? idxOrUpdater(prev)
-          : idxOrUpdater
-      );
+        if (
+          nextIndex === prev ||
+            nextIndex < 0 ||
+            nextIndex >= imagesLength ||
+            imagesLength === 0
+        ) {
+          return prev;
+        }
+
+        mainImageRef?.current?.classList.add("loading");
+        zoomImageRef?.current?.classList.add("loading");
+
+        return nextIndex;
+      });
     },
-    [mainImageRef, zoomImageRef]
+    [imagesLength, mainImageRef, zoomImageRef]
   );
 
   const prevImage = useCallback(() => {
