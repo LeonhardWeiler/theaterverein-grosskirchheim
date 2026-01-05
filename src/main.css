@@ -69,7 +69,6 @@
 
 html {
   background-color: var(--darker);
-  overflow-x: hidden;
 }
 
 img {
