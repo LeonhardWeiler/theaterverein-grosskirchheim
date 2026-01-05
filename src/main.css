@@ -637,6 +637,7 @@ main {
   padding: 2rem;
   font-size: clamp(1rem, 3vw, 1.2rem);
   max-width: 1300px;
+  border-radius: 0.5rem;
 
   p {
     max-width: clamp(40ch, 50%, 70ch);
