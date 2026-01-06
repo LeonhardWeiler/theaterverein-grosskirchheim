@@ -18,7 +18,7 @@ function VorstellungenListe() {
 
   const filteredItems = items
     .filter((item) =>
-      item.title.toLowerCase().includes(searchTerm.toLowerCase())
+      item.title.toLowerCase().startsWith(searchTerm.toLowerCase())
     )
     .filter((item) =>
       selectedYear ? parseInt(item.year) === selectedYear : true
