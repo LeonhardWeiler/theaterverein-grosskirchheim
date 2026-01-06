@@ -549,7 +549,6 @@ main {
 
 .hero {
   position: relative;
-  width: 100vw;
   height: 97svh;
   overflow: hidden;
   margin-bottom: 0;
