@@ -242,7 +242,7 @@ ul {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100svh;
+  height: 100vh;
   text-align: center;
   color: var(--lighter);
 
@@ -410,7 +410,7 @@ main {
 /* Image */
 .carousel-image {
   width: 100%;
-  height: 650px;
+  height: 60vh;
   object-fit: contain;
   opacity: 1;
   transition: opacity 0.4s ease;
@@ -549,7 +549,7 @@ main {
 
 .hero {
   position: relative;
-  height: 97svh;
+  height: 97vh;
   overflow: hidden;
   margin-bottom: 0;
 
