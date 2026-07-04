@@ -27,7 +27,8 @@ urls.forEach(u => sitemap.write(u));
 sitemap.end();
 
 streamToPromise(sitemap).then(sm => {
+  fs.mkdirSync('public', { recursive: true });
   writeFileSync('public/sitemap.xml', sm);
-  console.log('Sitemap erfolgreich erstellt: public/sitemap.xml');
+  console.log(`Sitemap erfolgreich erstellt: public/sitemap.xml (${urls.length} URLs)`);
 });
 
