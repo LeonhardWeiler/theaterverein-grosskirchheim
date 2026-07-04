@@ -1,19 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { loadMedia } from "../../../utils/loadMedia";
 
 export function useCarouselImages(folder, imageCount, currentIndex) {
-  const [images, setImages] = useState([]);
   const preloaded = useRef(new Set());
 
   // --------------------- LOAD IMAGES ---------------------
-  useEffect(() => {
+  // Reiner abgeleiteter Zustand: aus folder/imageCount ableiten statt per
+  // setState im Effect zu setzen (spart einen zusätzlichen Render-Durchlauf).
+  const images = useMemo(() => {
     const media = loadMedia(folder, imageCount);
 
-    const validImages = Array.isArray(media)
+    return Array.isArray(media)
       ? media.filter(img => img && img.big)
       : [];
-
-    setImages(validImages);
   }, [folder, imageCount]);
 
   // --------------------- PRELOAD NEXT IMAGES ---------------------
