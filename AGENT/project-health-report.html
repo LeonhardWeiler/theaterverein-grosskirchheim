@@ -219,7 +219,7 @@
     <main>
       <h1>Health-Report · theaterverein-grosskirchheim</h1>
       <div class="meta">
-        Momentaufnahme · Stand <strong>2026-07-03</strong> · Branch
+        Momentaufnahme · Stand <strong>2026-07-04</strong> · Branch
         <code>main</code> · React 19 + React-Router 7 + Vite (React Compiler) ·
         Remote GitHub · Deploy via <code>deploy.mjs</code> (git-worktree →
         <code>publish</code>)
@@ -229,9 +229,11 @@
         (<code>sharp</code>-Resize in 3 Größen), Sitemap-Generator und ein
         Git-Worktree-Deploy nach <code>publish</code> inkl. generiertem
         Apache-<code>.htaccess</code> (SPA-Fallback + Cache-Header). Kein Secret
-        im Repo, <code>dist</code> nicht versioniert, Build grün. Hauptreibung:
-        das Lint-Gate ist durch einen fehlenden Ignore-Eintrag praktisch
-        unbrauchbar, und die Bild-Pipeline löscht ihre Originale.
+        im Repo, <code>dist</code> nicht versioniert, Build grün. Alle zuvor
+        offenen Findings sind abgearbeitet: Lint-Gate ignoriert jetzt
+        <code>.publish</code> (<code>eslint .</code> vollständig grün), die
+        Bild-Pipeline sichert Originale statt sie zu löschen, der Deploy fängt
+        „nothing to commit" ab und generiert die Sitemap im Build.
       </div>
 
       <div class="summary">
@@ -242,10 +244,10 @@
           <span class="n">0</span><span class="l">Hoch</span>
         </div>
         <div class="stat mittel">
-          <span class="n">2</span><span class="l">Mittel</span>
+          <span class="n">0</span><span class="l">Mittel</span>
         </div>
         <div class="stat niedrig">
-          <span class="n">4</span><span class="l">Niedrig</span>
+          <span class="n">0</span><span class="l">Niedrig</span>
         </div>
         <div class="stat info">
           <span class="n">0</span><span class="l">Info</span>
@@ -282,139 +284,23 @@
       <section>
         <h2 class="sec">1 · Offene Findings</h2>
 
-        <div class="card mittel">
+        <div class="card good">
           <div class="card-head">
-            <span class="id">LINT-1</span
-            ><span class="badge mittel">mittel</span>
-            <span class="loc">eslint.config.js</span>
+            <span class="id">KEINE</span
+            ><span class="badge good">erledigt</span>
           </div>
           <p>
-            <b>Lint-Gate durch fehlenden Ignore unbrauchbar.</b>
-            <code>eslint .</code> meldet 124 Errors — aber <b>123 davon</b>
-            stammen aus dem gebauten, minifizierten Bundle
-            <code>.publish/assets/index-*.js</code> (der Deploy-Worktree liegt
-            lokal vor). <code>eslint.config.js</code> ignoriert nur
-            <code>dist</code>, nicht <code>.publish</code>. Es bleibt genau
-            <b>1</b> echter Fehler im Quellcode (siehe HOOK-1). Effektiv
-            verdeckt das Rauschen echte Probleme.
-          </p>
-          <p class="rec">
-            <b>Empfehlung:</b> <code>.publish</code> (und ggf.
-            <code>public/assets</code>) in
-            <code>globalIgnores([...])</code> aufnehmen. Danach ist
-            <code>eslint .</code> aussagekräftig.
-          </p>
-        </div>
-
-        <div class="card mittel">
-          <div class="card-head">
-            <span class="id">DATA-1</span
-            ><span class="badge mittel">mittel</span>
-            <span class="loc">generate-images:41</span>
-          </div>
-          <p>
-            <b>Bild-Pipeline löscht die Originale.</b>
-            <code>generate-images</code> erzeugt
-            <code>-big/-medium/-small.webp</code> und löscht danach das Original
-            per <code>fs.unlinkSync(filePath)</code>. Die Originale liegen unter
-            <code>public/assets/</code> (per
-            <code>.gitignore</code> ausgeschlossen) — es gibt also
-            <em>keine</em> versionierte oder sonstige Sicherung der
-            Vollauflösung. Ein Teil-Fehler in <code>sharp</code> oder ein
-            späterer Re-Run kann Quellmaterial unwiederbringlich verlieren.
-          </p>
-          <p class="rec">
-            <b>Empfehlung:</b> Originale nicht löschen, sondern in einen
-            separaten, gesicherten (idealerweise versionierten oder per Backup
-            erfassten) Ordner verschieben; Löschen höchstens optional und erst
-            nach verifiziertem Ergebnis.
-          </p>
-        </div>
-
-        <div class="card niedrig">
-          <div class="card-head">
-            <span class="id">CLEAN-1</span
-            ><span class="badge niedrig">niedrig</span>
-            <span class="loc"
-              >src/data/vorstellungen.json.bak · .gitignore</span
-            >
-          </div>
-          <p>
-            <b>Generiertes Backup ist eingecheckt.</b>
-            <code>src/data/vorstellungen.json.bak</code> ist versioniert — es
-            wird von <code>get-image-count</code> als Backup erzeugt und gehört
-            nicht ins Repo.
-          </p>
-          <p class="rec">
-            <b>Empfehlung:</b> Datei entfernen (<code>git rm</code>) und
-            <code>*.bak</code> in <code>.gitignore</code> aufnehmen.
-          </p>
-        </div>
-
-        <div class="card niedrig">
-          <div class="card-head">
-            <span class="id">DEPLOY-1</span
-            ><span class="badge niedrig">niedrig</span>
-            <span class="loc">deploy.mjs · generate-sitemap.js</span>
-          </div>
-          <p>
-            <b>Deploy-Robustheit &amp; Sitemap-Aktualität.</b> Zwei Punkte: (1)
-            <code>git -C .publish commit -m "Auto deploy"</code> schlägt fehl,
-            wenn sich am Build nichts geändert hat — der
-            <code>catch</code> meldet dann fälschlich „Deployment failed",
-            obwohl es nur „nothing to commit" ist. (2)
-            <code>generate-sitemap.js</code> wird im Deploy nicht aufgerufen;
-            die <code>sitemap.xml</code> kann bei neuen Vorstellungen veralten.
-          </p>
-          <p class="rec">
-            <b>Empfehlung:</b> „nothing to commit" abfangen (Diff prüfen bzw.
-            Exit-Code tolerieren); Sitemap-Generierung in den Build-/Deploy-Flow
-            einhängen (z. B. als <code>prebuild</code>-Script).
-          </p>
-        </div>
-
-        <div class="card niedrig">
-          <div class="card-head">
-            <span class="id">HOOK-1</span
-            ><span class="badge niedrig">niedrig</span>
-            <span class="loc"
-              >src/components/carousel/hooks/useCarouselImages.js:16</span
-            >
-          </div>
-          <p>
-            <b>Abgeleiteter State über <code>setState</code> im Effect.</b> Der
-            einzige echte Lint-Fehler
-            (<code>react-hooks/set-state-in-effect</code>):
-            <code>images</code> wird in einem <code>useEffect</code> aus
-            <code>folder</code>/<code>imageCount</code> gesetzt, obwohl es sich
-            um reinen abgeleiteten Zustand handelt — das erzeugt einen
-            zusätzlichen Render-Durchlauf.
-          </p>
-          <p class="rec">
-            <b>Empfehlung:</b> <code>images</code> per
-            <code>useMemo(() =&gt; …, [folder, imageCount])</code> ableiten
-            statt per Effect zu setzen.
-          </p>
-        </div>
-
-        <div class="card niedrig">
-          <div class="card-head">
-            <span class="id">DOC-1</span
-            ><span class="badge niedrig">niedrig</span>
-            <span class="loc">README.md · (fehlende) CLAUDE.md</span>
-          </div>
-          <p>
-            <b>Dünne Doku für ein Setup mit vielen Sonderwegen.</b> Das README
-            hat 2 Sätze. Weder die Generatoren (<code>generate-images</code>,
-            <code>generate-cover</code>, <code>get-image-count</code> — braucht
-            <code>jq</code>) noch der Worktree-Deploy (<code>.publish</code>,
-            <code>git worktree add</code>) sind dokumentiert. Eine
-            <code>CLAUDE.md</code> fehlt.
-          </p>
-          <p class="rec">
-            <b>Empfehlung:</b> README um Dev-/Build-/Deploy-/Asset- Workflow
-            ergänzen (inkl. <code>jq</code>-Abhängigkeit und Worktree- Setup);
-            <code>CLAUDE.md</code> via <code>create-claude-md</code> anlegen.
+            Keine offenen Findings. Die zuvor gemeldeten Punkte LINT-1, DATA-1,
+            CLEAN-1, DEPLOY-1, HOOK-1 und DOC-1 wurden umgesetzt: ESLint
+            ignoriert nun <code>.publish</code>/<code>public/assets</code> und
+            <code>eslint .</code> ist grün; <code>generate-images</code>
+            verschiebt Originale nach <code>./originals</code> statt sie zu
+            löschen (<code>DELETE_ORIGINALS=1</code> optional); das eingecheckte
+            <code>*.bak</code> ist entfernt und ignoriert;
+            <code>deploy.mjs</code> fängt „nothing to commit" ab und die Sitemap
+            läuft als <code>prebuild</code>; <code>useCarouselImages</code>
+            leitet <code>images</code> per <code>useMemo</code> ab; README und
+            <code>CLAUDE.md</code> dokumentieren die Workflows.
           </p>
         </div>
       </section>
