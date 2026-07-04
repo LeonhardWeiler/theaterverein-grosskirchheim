@@ -15,6 +15,9 @@ dist-ssr
 /src/assets/
 /public/assets/
 
+# Von get-image-count erzeugte Backups
+*.bak
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
