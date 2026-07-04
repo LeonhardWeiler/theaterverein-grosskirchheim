@@ -3,6 +3,13 @@ import path from 'path';
 import sharp from 'sharp';
 
 const baseDir = './public/assets/images';
+// Originale werden nach der Konvertierung hierher verschoben statt gelöscht.
+// Dieser Ordner liegt außerhalb von public/assets (wird also nicht ausgeliefert
+// und nicht erneut verarbeitet) und sollte gesichert/gebackupt werden.
+const originalsDir = './originals';
+// Nur setzen, wenn Originale nach verifiziertem Ergebnis bewusst gelöscht werden
+// sollen: DELETE_ORIGINALS=1 node generate-images
+const deleteOriginals = process.env.DELETE_ORIGINALS === '1';
 
 const sizes = [
   { suffix: '-big', width: 1200, quality: 80 },
@@ -31,14 +38,29 @@ async function processImage(filePath) {
     }
   }
 
-  // Lösche Originaldatei nur, wenn alle Größen erfolgreich erstellt wurden
-  if (success) {
+  // Original nur anfassen, wenn alle Größen erfolgreich erstellt wurden
+  if (!success) return;
+
+  if (deleteOriginals) {
     try {
       fs.unlinkSync(filePath);
       console.log(`🗑️ Deleted original file: ${filePath}`);
     } catch (err) {
       console.error(`❌ Failed to delete original file: ${filePath}`, err);
     }
+    return;
+  }
+
+  // Standard: Original in den gesicherten originals-Ordner verschieben
+  // (Struktur relativ zu baseDir wird beibehalten).
+  try {
+    const relPath = path.relative(baseDir, filePath);
+    const destPath = path.join(originalsDir, relPath);
+    fs.mkdirSync(path.dirname(destPath), { recursive: true });
+    fs.renameSync(filePath, destPath);
+    console.log(`📦 Moved original to: ${destPath}`);
+  } catch (err) {
+    console.error(`❌ Failed to move original file: ${filePath}`, err);
   }
 }
 
