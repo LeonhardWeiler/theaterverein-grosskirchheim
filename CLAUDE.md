@@ -1,7 +1,5 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 ## Überblick
 
 Statische SPA (React 19 + Vite 7 + React Router 7) für den Theaterverein Großkirchheim. Zeigt Theaterproduktionen (Vorstellungen) mit Bildergalerien und eine Kontaktseite. Kein Backend — alle Inhalte kommen aus JSON-Dateien und statischen Assets.
@@ -51,4 +49,3 @@ Deployt in einen **Git-Worktree** `.publish/`, der auf dem `publish`-Branch lieg
 ## Hinweise
 - React Compiler ist via `babel-plugin-react-compiler` aktiv (über `@vitejs/plugin-react`).
 - Ziel-Domain / Hostname: `https://theater-grosskirchheim.at` (in `generate-sitemap.js`).
-- `AGENT/` enthält `TODO.md` und `project-health-report.html` — Arbeitsdateien für Agenten-Workflows (siehe die Skills `implement-todo` und `review-and-update-report`), kein Teil der Website.
