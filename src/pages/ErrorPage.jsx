@@ -6,7 +6,7 @@ export default function ErrorPage() {
 
   return (
     <div className="error-page">
-      <h1>Oops! Etwas ist schief gelaufen.</h1>
+      <h1>Etwas ist schiefgelaufen.</h1>
       <p>Error: {error.statusText || error.message}</p>
       <Link className="btn" to="/">Zurück zur Startseite</Link>
     </div>
