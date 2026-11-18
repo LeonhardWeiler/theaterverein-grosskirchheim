@@ -132,11 +132,9 @@ AddType font/woff .woff
     console.log("Committing...");
     run(`git -C ${PUBLISH_DIR} add .`);
 
-    // "nothing to commit" ist kein Fehler: Wenn sich am Build nichts geändert
-    // hat, gibt es nichts zu deployen — sauber beenden statt fälschlich failen.
     const publishDiff = runSilent(`git -C ${PUBLISH_DIR} status --porcelain`);
     if (publishDiff.length === 0) {
-      console.log("No changes to deploy — build output is unchanged.");
+      console.log("No changes to deploy, build output is unchanged.");
       return;
     }
 

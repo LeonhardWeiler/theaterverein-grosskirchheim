@@ -13,14 +13,14 @@ function Home() {
       <section id="about-us" className="about-us">
         <div className="about-us-text">
           <h2 className="heading-home">Über uns</h2>
-          <p>Das Theater Großkirchheim ist eine leidenschaftliche Gemeinschaft von Theaterliebhabern, die sich der Kunst des Theaters verschrieben haben. Seit unserer Gründung im Jahr 1985 haben wir es uns zur Aufgabe gemacht, qualitativ hochwertige Theateraufführungen zu präsentieren und die kulturelle Vielfalt unserer Region zu bereichern.</p>
+          <p>Wir sind eine Theatergruppe aus Großkirchheim. Seit der Gründung 1985 bringen wir regelmäßig neue Stücke auf die Bühne.</p>
         </div>
         <img loading="lazy" src="/assets/images/2023-schmuckeralm/images/0025-medium.webp" alt="Foto der Vorstellung 2023 Schmuckeralm mit Schauspieler:innen auf der Bühne" className="about-us-img" />
       </section>
       <section className="all-shows">
         <div className="accent-bg">
           <h2 className="heading-home">Alle Vorstellungen</h2>
-          <p>Entdecke unsere vielfältigen Theateraufführungen, von klassischen Stücken bis hin zu modernen Inszenierungen. Tauche ein in die Welt des Theaters und erlebe unvergessliche Momente voller Emotionen und Spannung.</p>
+          <p>Hier findest du alle unsere bisherigen Stücke mit Beschreibung und Fotos.</p>
           <Link to="/vorstellungen" className="btn">Zu den Vorstellungen</Link>
         </div>
       </section>
